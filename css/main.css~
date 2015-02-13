@@ -1,0 +1,84 @@
+html,body,div,h1,h2,h3,p,ul,li,a,img{
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	width: 100%;
+	height: auto;
+	font-family: 'Lato', Arial, Sans Serif;
+}
+
+h1 {
+	font-family: 'code_lightregular';
+	display: inline;
+	font-size: 48px;
+}
+
+.rule {
+	width: 5px;
+	height: 48px;
+	display: inline-block;
+}
+
+
+#header {
+	height: 75px;
+	width: 100%;
+	display: block;
+}
+
+#logo {
+	height: 50px;
+	width: 50px;
+	margin-left: 25%;
+	margin-top: 12.5px;
+	display: inline-block;
+	-webkit-box-shadow: 0 2px 2px #666;
+	box-shadow: 0 2px 2px #666;
+	border-radius: 3px;
+	background-color: #999;
+}
+
+.login_button {
+	height: 40px;
+	width: 70px;
+	float: right;
+	margin-right: 25%;	
+	margin-top: 17.5px;
+	display: inline;
+	-webkit-box-shadow: 0 2px 2px #666;
+	box-shadow: 0 2px 2px #666;
+	border-radius: 3px;
+	border: none;
+	background-color: #666;
+	color: #fff;
+	font-family: 'code_boldregular';
+	line-height: 40px;
+}
+
+#main {
+	height: 805px;
+	width: 100%;
+	display: block;
+	/* text-align: center; */
+}
+
+.title_box {
+	margin-top: -5px;
+	margin-left: 25%;
+}
+
+#map_wrapper {
+	height: 500px;
+	width: 100%;
+	background-color: #666;
+	display: block;
+}
+
+#footer {
+	height: 75px;
+	width: 100%;
+	background-color: #333;
+	display: block;
+}
