@@ -75,3 +75,9 @@ h1 {
 	background-color: #333;
 	display: block;
 }
+
+input[type="twitter-button"]
+{
+  background:url(sign-in-with-twitter-gray.png);
+  text-indent: -9999em;
+}
