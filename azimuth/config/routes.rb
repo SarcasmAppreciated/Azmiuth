@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :users
   get   '/login', :to => 'sessions#new', :as => :login
-  post '/auth/:provider/callback', :to => 'sessions#create'
+  get '/auth/twitter/callback', :to => 'sessions#create'
   delete '/auth/failure', :to => 'sessions#failure'
 
   root 'welcome#index'
