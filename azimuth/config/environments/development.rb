@@ -1,4 +1,6 @@
 Rails.application.configure do
+  config.twitter_key = "GOLr7vhTG0zTBSwDrGrCggGes"
+  config.twitter_secret =  "F0gHakPmJvFp8x5zDlNnILN52TAF1AbQmZ2sEYqiT3I0k1m8DF"
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -36,6 +38,8 @@ Rails.application.configure do
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
+
+
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

@@ -1,27 +1,33 @@
 class TwitterController < ApplicationController
 
 	def tweetview
-		# def prepare_access_token(oauth_token, oauth_token_secret)
-  #           oauth_token = 
-  #           oauth_token_secret = 
-  #           consumer = OAuth::Consumer.new("APIKey", "APISecret"
-  #               { :site => "http://api.twitter.com"
-  #               })
-  #           # now create the access token object from passed values
-  #           token_hash = { :oauth_token => oauth_token,
-  #                                        :oauth_token_secret => oauth_token_secret
-  #                                    }
-  #           access_token = OAuth::AccessToken.from_hash(consumer, token_hash )
-  #           return access_token
-  #       end
+        require "twitter"
 
 		@user = current_user
 		@auth = @user.authorizations.first
-		if @user
-			puts "#{@auth.secret}"
+
+        # Exchange our oauth_token and oauth_token secret for the AccessToken instance.
+        
+       
+		#response = access_token.request(:get, "https://api.twitter.com/1.1/statuses/home_timeline.json")
+        #render :json => response.body
+        @client = Twitter::REST::Client.new do |config|
+            config.consumer_key = Rails.application.config.twitter_key
+            config.consumer_secret = Rails.application.config.twitter_secret
+            config.access_token = @auth['token']
+            config.access_token_secret = @auth['secret']
+        end
+
+        @client.update("gem auth PPATEN")
+        
+        if @user
+			puts "#{response}"
 		else 
 			puts "NoNoNo"
 		end
-	end
 
+	end
 end
+
+#  config.consumer_key   = Rails.application.config.twitter_key
+#config.consumer_secret     = Rails.application.config.twitter_secret
