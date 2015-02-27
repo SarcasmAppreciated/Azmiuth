@@ -25,7 +25,14 @@ class TwitterController < ApplicationController
             #pull (the last) tweet
             response = @client.user_timeline({count: 1})
             @msg = response.first.text
+            #Get coordinates: NOTE THIS IS HIGHLY SENSITIVE USER OPTIONS
+            #Likely need a more robust implementation to parsing geo data
+            geo = response.first.geo.coordinates
+            @lat = geo.first
+            @long = geo.second
             puts @msg
+            puts @lat
+            puts @long
             #render :json => response
 
 
