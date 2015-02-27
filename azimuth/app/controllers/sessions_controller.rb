@@ -8,7 +8,11 @@ class SessionsController < ApplicationController
 	@authorization = Authorization.find_by_provider_and_uid("twitter", auth_hash["uid"])
 	if @authorization
 		@user = @authorization.user
-		render :text => "Welcome back #{@authorization.user.name}! You have already signed up."
+		#redirect_to root
+		sign_in_and_redirect(:user, @authorization.user)
+		flash.now[:alert] = "Welcome back #{@authorization.user.name}! You have already signed up."
+		#redirect_to '/twitter/tweetview'
+		#render :text => "Welcome back #{@authorization.user.name}! You have already signed up."
 	else
 		#user = User.new :name => auth_hash["user_info"]["name"], :email => auth_hash["user_info"]["email"]
 		#user.authorizations.build :provider => auth_hash["provider"], :uid => auth_hash["uid"]

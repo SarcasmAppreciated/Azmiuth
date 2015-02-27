@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :sessions => "sessions" }
   #get   '/login', :to => 'sessions#new', :as => :login
   get '/auth/twitter/callback', :to => 'sessions#create'
   delete '/auth/failure', :to => 'sessions#failure'
