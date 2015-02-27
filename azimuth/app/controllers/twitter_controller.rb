@@ -30,10 +30,18 @@ class TwitterController < ApplicationController
             geo = response.first.geo.coordinates
             @lat = geo.first
             @long = geo.second
+
+            @time_stamp = response.first.created_at
+            @id = response.first.id
+            
+
             puts @msg
             puts @lat
             puts @long
-            #render :json => response
+            puts @time_stamp
+            puts @id
+
+            render :json => response
 
 
 		else 
