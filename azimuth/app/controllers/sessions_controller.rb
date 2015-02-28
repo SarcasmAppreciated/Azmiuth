@@ -45,8 +45,12 @@ class SessionsController < ApplicationController
 
   def destroy
   	@user = current_user
-  	@user.destroy
-  	render :text => "profile deleted."
+  	if 	@user
+  		@user.destroy
+  		render :text => "profile deleted."
+  	else 
+  		render :text => "not logged in."
+  	end
   end
 
 end
