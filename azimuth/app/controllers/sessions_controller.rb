@@ -33,16 +33,20 @@ class SessionsController < ApplicationController
 	end
   end
 
+
+  def logout
+  	@user = current_user
+  	sign_out_and_redirect(@user)
+  end
+
   def failure
+  	render :text => "Sorry, but you didn't allow access to our app!"
   end
 
   def destroy
-  	session[:user_id] = nil
-  	render :text => "You've logged out!"
-  end
-
-  def failure
-  render :text => "Sorry, but you didn't allow access to our app!"
+  	@user = current_user
+  	@user.destroy
+  	render :text => "profile deleted."
   end
 
 end
