@@ -61,19 +61,24 @@ class TwitterController < ApplicationController
         time_stamp = response.created_at
         id = response.id
         geo = response.geo
-        if !geo
+        if geo.nil?
             #will not process a tweet without a geoTag
             flash.now[:notice] = "no geotag for #{id}!"
             return
         end
         coordinates = geo.coordinates
-        if !coordinates
+        if coordinates.nil?
             #will not process a tweet without a corrdinate
             flash.now[:notice] = "no coordinates for #{id}!"
             return
         end
         lat = coordinates.first
         long = coordinates.second
+        if lat.nil? or long.nil?
+             #will not process a tweet without a lat/long
+            flash.now[:notice] = "no lat/long for #{id}!"
+            return 
+        end
         user.tweets.build :tweet_text => tweet_text, :time_stamp => time_stamp, :latitude => lat, :longitude => long, :tweet_id => id
         user.save
         puts tweet_text
@@ -82,7 +87,7 @@ class TwitterController < ApplicationController
 
 	def tweetview
 		@user = current_user
-        if @user
+        if !@user.nil?
             @user_tweets = @user.tweets(:sort){:time_stamp}
 		else 
             puts "no no no"
@@ -90,10 +95,10 @@ class TwitterController < ApplicationController
 	end
 
     def user_signed_in
-        if current_user
-            return true
-        else 
+        if current_user.nil?
             return false
+        else 
+            return true
         end
   end
 end

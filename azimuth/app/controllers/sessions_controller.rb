@@ -11,8 +11,7 @@ class SessionsController < ApplicationController
 		flash.now[:notice] = "Welcome back #{@authorization.user.name}! You have already signed up."
 		sign_in_and_redirect(:user, @user)
 	else
-		@user = User.new :name => auth_hash["info"]["name"], :email =>  "default@mail.com"
-		@user.password = "password"
+		@user = User.new :name => auth_hash["info"]["name"], :uid => auth_hash["uid"]
 		@user.authorizations.build :provider => "twitter", :uid => auth_hash["uid"], :secret => auth_hash['credentials']['secret'], :token => auth_hash['credentials']['token']
 		@user.save
 		@user.errors.each do |error|
