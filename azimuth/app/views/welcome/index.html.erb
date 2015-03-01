@@ -20,6 +20,9 @@
 	</head>
 	<body>
 	<% if user_signed_in? %>
+		<a href="/auth/logout">logout</a>
+		<br>
+		<a href="/auth/destroy">destroy user profile</a>
 	<% else %>
 	<div id="header">
 			<div id="logo"></div>
