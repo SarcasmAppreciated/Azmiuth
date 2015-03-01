@@ -19,10 +19,17 @@
 
 	</head>
 	<body>
-		<div id="header">
+	<% if user_signed_in? %>
+		<a href="/auth/logout">logout</a>
+		<br>
+		<a href="/auth/destroy">destroy user profile</a>
+	<% else %>
+	<div id="header">
 			<div id="logo"></div>
 			<a href="/auth/twitter"><img src="assets/sign-in-with-twitter-gray.png"/></a>
 		</div>
+	<% end %>
+		
 		<div id="header">
 		<a href="/twitter/tweetview">
 		</div>		
