@@ -4,9 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def current_user
-  	puts "***********************************"
-  	puts session[:uid]
-  	puts "***********************************"
   	return User.find_by_uid(session[:uid])
   end
   

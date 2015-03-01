@@ -90,7 +90,7 @@ class TwitterController < ApplicationController
         if !@user.nil?
             @user_tweets = @user.tweets(:sort){:time_stamp}
 		else 
-            puts "no no no"
+            puts "user not signed in"
 		end
 	end
 
