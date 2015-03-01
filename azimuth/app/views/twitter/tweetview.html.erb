@@ -1,5 +1,7 @@
  	<a href="/twitter/update_all_users">Update All Users</a>
 	<br>
+	<%= link_to "Home", root_path %>
+	<br>
  <% if user_signed_in? %>
  		<a href="/twitter/update_current_user">Update <%= @user['name'] %></a>
  		<br>
