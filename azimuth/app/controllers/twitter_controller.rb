@@ -1,6 +1,6 @@
 class TwitterController < ApplicationController
     require "twitter"
-    @@number_of_tweets_to_pull = 2
+    @@number_of_tweets_to_pull = 5
 
     def get_client(user)
         auth = user.authorizations.first
@@ -27,13 +27,33 @@ class TwitterController < ApplicationController
     def update_user_tweets(user, n)
         responses = pull_last_n_tweets(user,n)
         responses.each do |response|
-        process_tweet(response, user)
-       end
+            process_tweet(response, user)
+        end
     end
 
     def update_current_user
         user = current_user
         update_user_tweets(user, @@number_of_tweets_to_pull)
+        redirect_to '/twitter/tweetview'
+    end
+
+    def update_all_users
+        User.all.each do |user|
+            update_user_tweets(user, @@number_of_tweets_to_pull)
+        end
+       redirect_to '/twitter/tweetview'
+    end
+
+    #Do not EVER send duplicate tweets! EVER!!! 
+    #Twitter's API rules fobids sending duplicates
+    def push_generic_message
+        user = current_user
+        message = "Hello #{user.name}! "
+        #Twitter's API forbids sending duplicate tweets
+        r = rand(1000)
+        message += r.to_s
+        pushTweet(user, message)
+        redirect_to '/twitter/tweetview'
     end
 
     def process_tweet(response, user)
@@ -63,48 +83,17 @@ class TwitterController < ApplicationController
 	def tweetview
 		@user = current_user
         if @user
-            update_current_user
-            @auth = @user.authorizations.first
-            @client = Twitter::REST::Client.new do |config|
-                config.consumer_key = Rails.application.config.twitter_key
-                config.consumer_secret = Rails.application.config.twitter_secret
-                config.access_token = @auth['token']
-                config.access_token_secret = @auth['secret']
-            end
-
-            #push a tweet
-            #@client.update("gem auth PPATEN")
-
-            #pull (the last) tweet
-            response = @client.user_timeline({count: 1})
-            @tweet_text = response.first.text
-            @time_stamp = response.first.created_at
-            @id = response.first.id
-
-            #Get coordinates: NOTE THIS IS HIGHLY SENSITIVE USER OPTIONS
-            #Likely need a more robust implementation to parsing geo data
-            geo = response.first.geo.coordinates
-            @lat = geo.first
-            @long = geo.second
-
-
-            
-            #puts @tweet_text
-            #puts @lat
-            #puts @long
-            #puts @time_stamp
-            #puts @id
-
-            @user.tweets.build :tweet_text => @tweet_text, :time_stamp => @time_stamp, :latitude => @lat, :longitude => @long, :tweet_id => @id
-            @user.save
-            #render :json => response
+            @user_tweets = @user.tweets(:sort){:time_stamp}
 		else 
-            @tweet_text = "None"
-            @lat = "None"
-            @long = "None"
-            @time_stamp = "None"
-            @id = "None"
-			puts @tweet_text
+            puts "no no no"
 		end
 	end
+
+    def user_signed_in
+        if current_user
+            return true
+        else 
+            return false
+        end
+  end
 end
