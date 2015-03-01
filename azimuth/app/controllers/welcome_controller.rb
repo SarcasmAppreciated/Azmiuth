@@ -3,10 +3,10 @@ class WelcomeController < ApplicationController
   end
 
   def user_signed_in
-  	if current_user
-  		return true
-  	else 
+  	if current_user.nil?
   		return false
+  	else 
+  		return true
   	end
   end
 end
