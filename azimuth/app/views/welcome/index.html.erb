@@ -19,16 +19,16 @@
 
 	</head>
 	<body>
-	<!--<% if user_signed_in? %>
-		<a href="/auth/logout">logout</a>
-		<br>
-		<a href="/auth/destroy">destroy user profile</a>
-	<% else %>-->
 		<div id="header">
-			<div id="logo"></div>
-			<a href="/auth/twitter"><div class="login_button">Login</div></a>
+			<div id="logo">A</div>
+			<% if user_signed_in? %>
+				<a href="/auth/logout"><div class="login_button">Logout</div></a>
+				<a href="/auth/destroy"><div class="login_button destroy"></div></a>
+				<div id="avatar"></div>
+			<% else %>		
+				<a href="/auth/twitter"><div class="login_button">Login</div></a>
+			<% end %>
 		</div>
-	<!--<% end %>-->
 		<div id="main">
 			<div id="map_wrapper">
 			</div>
