@@ -12,7 +12,7 @@ class TwitterController < ApplicationController
         end
         return client 
     end
-
+		
     def pushTweet(user, message)
         client = get_client(user)
         client.update(message)
@@ -93,7 +93,7 @@ class TwitterController < ApplicationController
             puts "user not signed in"
 		end
 	end
-
+	
     def user_signed_in
         if current_user.nil?
             return false

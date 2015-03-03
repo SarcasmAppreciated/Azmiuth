@@ -6,6 +6,5 @@ class ApplicationController < ActionController::Base
   def current_user
   	return User.find_by_uid(session[:uid])
   end
-  
-
+   
 end

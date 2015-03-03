@@ -21,8 +21,7 @@ class SessionsController < ApplicationController
 	end
   redirect_to :root
   end
-
-
+  
   def logout
   	@user = current_user
     session[:uid] = nil
