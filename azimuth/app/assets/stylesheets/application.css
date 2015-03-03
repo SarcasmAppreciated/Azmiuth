@@ -12,7 +12,7 @@ html, body {
 h1 {
 	font-family: 'code_lightregular', 'Lato', Arial, Sans Serif;
 	display: inline;
-	font-size: 48px;
+	font-size: 60px;
 }
 
 h2 {
@@ -112,7 +112,7 @@ a {
 }
 
 #map_wrapper {
-	height: 550px;
+	height: 650px;
 	width: 100%;
 	background-color: #666;
 	display: block;
