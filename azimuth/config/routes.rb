@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users
-  get   '/login', :to => 'sessions#new', :as => :login
+  devise_for :users, :controllers => { :sessions => "sessions" }
   get '/auth/twitter/callback', :to => 'sessions#create'
-  delete '/auth/failure', :to => 'sessions#failure'
-  get '/logout', :to => 'sessions#destroy'
-
+  get '/auth/failure', :to => 'sessions#failure'
+  get '/auth/logout', :to => 'sessions#logout'
+  get '/auth/destroy', :to => 'sessions#destroy'
+  get '/twitter/update_all_users', :to => 'twitter#update_all_users'
+  get '/twitter/update_current_user', :to => 'twitter#update_current_user'
+  get '/twitter/tweetview', :to => 'twitter#tweetview'
+  get '/twitter/push_generic_message', :to => 'twitter#push_generic_message'
   root 'welcome#index'
 end
