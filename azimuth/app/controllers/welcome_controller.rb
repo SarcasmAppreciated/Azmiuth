@@ -9,4 +9,5 @@ class WelcomeController < ApplicationController
   		return true
   	end
   end
+  
 end
