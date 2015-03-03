@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
 		flash.now[:notice] = "Welcome back #{@authorization.user.name}! You have already signed up."
     session[:uid] = auth_hash["uid"].to_i 
 	else
-		@user = User.new :name => auth_hash["info"]["name"], :uid => auth_hash["uid"]
+		@user = User.new :name => auth_hash["info"]["name"], :uid => auth_hash["uid"], :profile_image_url => auth_hash["info"]["image"]
     @user.authorizations.build :provider => "twitter", :uid => auth_hash["uid"], :secret => auth_hash['credentials']['secret'], :token => auth_hash['credentials']['token']
 		@user.save!
 		@user.errors.each do |error|
