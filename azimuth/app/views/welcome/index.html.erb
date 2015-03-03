@@ -9,8 +9,8 @@
 		
 		<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no">
 		
-		<link rel="stylesheet" href="css/main.css">
-		<link rel="stylesheet" href="fonts/font_stylesheet.css">
+		<!--<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="fonts/font_stylesheet.css">-->
 		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 
 		<script src="scripts/jquery.min.js"></script>
@@ -19,29 +19,64 @@
 
 	</head>
 	<body>
-	<% if user_signed_in? %>
+	<!--<% if user_signed_in? %>
 		<a href="/auth/logout">logout</a>
 		<br>
 		<a href="/auth/destroy">destroy user profile</a>
-	<% else %>
-	<div id="header">
-			<div id="logo"></div>
-			<a href="/auth/twitter"><img src="assets/sign-in-with-twitter-gray.png"/></a>
-		</div>
-	<% end %>
-		
+	<% else %>-->
 		<div id="header">
-		<a href="/twitter/tweetview">
-		</div>		
+			<div id="logo"></div>
+			<a href="/auth/twitter"><div class="login_button">Login</div></a>
+		</div>
+	<!--<% end %>-->
 		<div id="main">
 			<div id="map_wrapper">
 			</div>
 			<div class="title_box">
-				<h1>PROJECT</h1><h1 style="font-family: 'code_boldregular'">AZIMUTH</h1>
-			</div>		
+				<a href="/twitter/tweetview">
+					<h1>PROJECT</h1>
+					<h1 style="font-family: 'code_boldregular'">AZIMUTH</h1>
+				</a>
+			</div>
+			<div id="table_wrapper">
+				<div id="table_expand"><h2>Coordinate Table </h2><span id="slide_span" style="display: inline-block; width: 10px"></span><div id="x_box">+</div></div>
+				<div id="table_box">
+				</div>
+			</div>
 		</div>
 		<div id="footer">
 		</div>
+		
+		<script>
+			$(document).ready(function(){	
+				var isOpen = false;
+				$("#x_box").click(function() {
+					if(isOpen) {
+						expand_table(10,0,0);
+						isOpen = false;
+					}
+					else {
+						expand_table(775,250,45)
+						isOpen = true;
+					}
+				});
+				
+				function expand_table(x, y, z) {
+					$("#slide_span").animate({width: x + "px" }, "fast",function(){
+						$('#x_box').css({
+							 '-moz-transform':'rotate(' + z + 'deg)',
+							 '-webkit-transform':'rotate(' + z + 'deg)',
+							 '-o-transform':'rotate(' + z + 'deg)',
+							 '-ms-transform':'rotate(' + z + 'deg)',
+							 'transform':'rotate(' + z + 'deg)'
+						});
+					});
+					$("#table_box").animate({height: y + "px" }, "slow",function(){
+						// $("#signupform").fadeIn("slow");
+					});
+				}
+			});
+		</script>
 	</body>
 </html>
 
