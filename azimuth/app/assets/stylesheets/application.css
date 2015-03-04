@@ -106,6 +106,12 @@ a {
 	text-align: center;
 }
 
+.content_realignment {
+	height: auto;
+	width: 1000px;
+	display: inline-block;
+}
+
 .title_box {
   height: 60px;
   width: 1000px;
