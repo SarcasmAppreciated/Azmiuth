@@ -24,7 +24,7 @@
 			<% if user_signed_in? %>
 				<a href="/auth/logout"><div class="login_button">Logout</div></a>
 				<a href="/auth/destroy"><div class="login_button destroy"></div></a>
-				<div id="avatar"><%= image_tag(current_user.profile_image_url, :width => 48, :height => 48) %></p></div>
+				<div id="avatar"><%= image_tag(current_user.profile_image_url, :width => 48, :height => 48) %></div>
 			<% else %>		
 				<a href="/auth/twitter"><div class="login_button">Login</div></a>
 			<% end %>
