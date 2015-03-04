@@ -96,6 +96,7 @@ a {
 	box-shadow: 0 2px 2px #666;
 	border-radius: 3px;
 	background-color: #999;
+  overflow: hidden;
 }
 
 #main {
@@ -106,9 +107,11 @@ a {
 }
 
 .title_box {
+  height: 60px;
+  width: 1000px;
+  display: inline-block;
 	margin-top: -5px;
-	margin-left: 25%;
-	text-align: left;
+  text-align: left;
 }
 
 #map_wrapper {
@@ -147,8 +150,6 @@ a {
 	width: 100%;
 	background-color: #333;
 	display: block;
-	position: absolute;
-	bottom: 0;
 }
 
 input[type="twitter-button"]
