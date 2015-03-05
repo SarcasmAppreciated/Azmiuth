@@ -7,7 +7,6 @@ class CreateTweets < ActiveRecord::Migration
       t.float    :latitude
       t.float    :longitude
       t.integer :tweet_id, :limit => 8,  :unique => true
-      t.timestamps null: false
     end
     add_foreign_key :tweets, :users
   end

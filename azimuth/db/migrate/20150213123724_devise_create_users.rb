@@ -3,9 +3,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
     create_table(:users) do |t|
       t.string :name,               null: false, default: ""
       t.string :profile_image_url,	null: false, default: ""
-      t.integer :uid              
-      t.timestamps null: false
+      t.integer :user_id              
     end
-    add_index :users, :uid,                  unique: true
+    add_index :users, :user_id,                  unique: true
   end
 end

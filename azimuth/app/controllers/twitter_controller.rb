@@ -3,7 +3,7 @@ class TwitterController < ApplicationController
     @@number_of_tweets_to_pull = 5
 
     def get_client(user)
-        auth = user.authorizations.first
+        auth = user.authorization
         client = Twitter::REST::Client.new do |config|
                 config.consumer_key = Rails.application.config.twitter_key
                 config.consumer_secret = Rails.application.config.twitter_secret
