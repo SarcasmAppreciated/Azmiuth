@@ -11,17 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227133849) do
+ActiveRecord::Schema.define(version: 20150213230846) do
 
   create_table "authorizations", force: :cascade do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "secret"
-    t.string   "token"
+    t.integer "user_id"
+    t.string  "secret"
+    t.string  "token"
   end
+
+  add_index "authorizations", ["user_id"], name: "index_authorizations_on_user_id"
 
   create_table "tweets", force: :cascade do |t|
     t.integer  "user_id"
@@ -30,20 +28,16 @@ ActiveRecord::Schema.define(version: 20150227133849) do
     t.float    "latitude"
     t.float    "longitude"
     t.integer  "tweet_id",   limit: 8
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
   end
 
   add_index "tweets", ["user_id"], name: "index_tweets_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",              default: "", null: false
-    t.string   "profile_image_url", default: "", null: false
-    t.integer  "uid"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.string  "name",              default: "", null: false
+    t.string  "profile_image_url", default: "", null: false
+    t.integer "user_id"
   end
 
-  add_index "users", ["uid"], name: "index_users_on_uid", unique: true
+  add_index "users", ["user_id"], name: "index_users_on_user_id", unique: true
 
 end
