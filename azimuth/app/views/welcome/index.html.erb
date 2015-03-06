@@ -24,7 +24,7 @@
 			<% if user_signed_in? %>
 				<a href="/auth/logout"><div class="login_button">Logout</div></a>
 				<a href="/auth/destroy"><div class="login_button destroy"></div></a>
-				<div id="avatar"><%= image_tag(current_user.profile_image_url, :width => 48, :height => 48) %></div>
+				<a href="/preferences/"><div id="avatar"><%= image_tag(current_user.profile_image_url, :width => 48, :height => 48) %></div>
 			<% else %>		
 				<a href="/auth/twitter"><div class="login_button">Login</div></a>
 			<% end %>
@@ -34,7 +34,7 @@
 			</div>
 			<div class="content_realignment">
 				<div class="title_box">
-					<a href="/twitter/tweetview">
+					<a href="/twitter/">
 						<h1>PROJECT</h1>
 						<h1 style="font-family: 'code_boldregular'">AZIMUTH</h1>
 					</a>

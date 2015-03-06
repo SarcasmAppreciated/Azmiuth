@@ -1,0 +1,12 @@
+<%= link_to "Home", root_path %>
+<br>
+<% if user_signed_in? %>
+	<h1>Set Prefrences for  <%= @user['name']%></h1>
+	<%= form_for @preference do |f| %>
+  	destination latitude: <%= f.text_field :destination_latitude %><br />
+  	destination longitude: <%= f.text_field :destination_longitude %><br />
+  	<%= f.submit "Update" %>
+<% end %>
+<% else %>
+	<h1>You are not signed in</h1>
+<% end %>

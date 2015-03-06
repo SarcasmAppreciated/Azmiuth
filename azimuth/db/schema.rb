@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213230846) do
+ActiveRecord::Schema.define(version: 20150305234756) do
 
   create_table "authorizations", force: :cascade do |t|
     t.integer "user_id"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 20150213230846) do
   end
 
   add_index "authorizations", ["user_id"], name: "index_authorizations_on_user_id"
+
+  create_table "preferences", force: :cascade do |t|
+    t.integer "user_id"
+    t.float   "destination_latitude"
+    t.float   "destination_longitude"
+  end
+
+  add_index "preferences", ["user_id"], name: "index_preferences_on_user_id"
 
   create_table "tweets", force: :cascade do |t|
     t.integer  "user_id"
