@@ -8,5 +8,9 @@ Rails.application.routes.draw do
   get '/twitter/update_current_user', :to => 'twitter#update_current_user'
   get '/twitter/tweetview', :to => 'twitter#tweetview'
   get '/twitter/push_generic_message', :to => 'twitter#push_generic_message'
+  resources :preferences
+
+            
+
   root 'welcome#index'
 end

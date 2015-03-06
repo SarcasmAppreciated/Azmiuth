@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
 	else
 		@user = User.new :name => auth_hash["info"]["name"], :user_id => auth_hash["uid"], :profile_image_url => auth_hash["info"]["image"]
     @user.build_authorization :secret => auth_hash['credentials']['secret'], :token => auth_hash['credentials']['token']
+    @user.build_preference
 		@user.save!
 		@user.errors.each do |error|
 			puts error
