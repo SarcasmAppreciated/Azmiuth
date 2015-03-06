@@ -1,3 +1,5 @@
+<%= link_to "Home", root_path %>
+<br>
 <% if user_signed_in? %>
 	<h1>Set Prefrences for  <%= @user['name']%></h1>
 	<%= form_for @preference do |f| %>
