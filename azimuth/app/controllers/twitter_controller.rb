@@ -34,14 +34,14 @@ class TwitterController < ApplicationController
     def update_current_user
         user = current_user
         update_user_tweets(user, @@number_of_tweets_to_pull)
-        redirect_to '/twitter/tweetview'
+        redirect_to '/twitter/'
     end
 
     def update_all_users
         User.all.each do |user|
             update_user_tweets(user, @@number_of_tweets_to_pull)
         end
-       redirect_to '/twitter/tweetview'
+       redirect_to '/twitter/'
     end
 
     #Do not EVER send duplicate tweets! EVER!!! 
@@ -53,7 +53,7 @@ class TwitterController < ApplicationController
         r = rand(1000)
         message += r.to_s
         pushTweet(user, message)
-        redirect_to '/twitter/tweetview'
+        redirect_to '/twitter/'
     end
 
     def process_tweet(response, user)
@@ -85,7 +85,7 @@ class TwitterController < ApplicationController
         flash.now[:notice] = "processed tweet #{id}!"
     end
 
-	def tweetview
+	def index
 		@user = current_user
         if !@user.nil?
             @user_tweets = @user.tweets(:sort){:time_stamp}
