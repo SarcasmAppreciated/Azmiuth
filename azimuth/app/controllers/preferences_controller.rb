@@ -1,7 +1,9 @@
 class PreferencesController < ApplicationController
 	def index
 		@user = current_user
-		@preference = @user.preference
+		if @user
+			@preference = @user.preference
+		end
 	end
 
 	def update
@@ -18,10 +20,6 @@ class PreferencesController < ApplicationController
 			redirect_to action: :index
 		end
 	end
-
-	def show
-	end
-
 
 	def user_signed_in
 		if current_user.nil?
