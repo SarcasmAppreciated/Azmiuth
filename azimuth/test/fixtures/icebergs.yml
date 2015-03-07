@@ -1,23 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  ice_year: 1
   berg_number: 1
-  time: 2015-03-07 10:22:51
+  time: 2015-03-07 14:31:02
   latitude: 1.5
   longitude: 1.5
-  method: MyString
   size: MyString
   shape: MyString
-  source: MyString
 
 two:
-  ice_year: 1
   berg_number: 1
-  time: 2015-03-07 10:22:51
+  time: 2015-03-07 14:31:02
   latitude: 1.5
   longitude: 1.5
-  method: MyString
   size: MyString
   shape: MyString
-  source: MyString
