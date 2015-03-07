@@ -1,0 +1,20 @@
+ 	<a href="/twitter/update_all_users">Update All Users</a>
+	<br>
+	<%= link_to "Home", root_path %>
+	<br>
+ <% if user_signed_in? %>
+ 		<a href="/twitter/update_current_user">Update <%= @user['name'] %></a>
+ 		<br>
+ 		<a href="/twitter/push_generic_message">Push generic tweet to <%= @user['name'] %></a>
+ 		<br>
+ 		<h1>Geotag data from tweets for  <%= @user['name'] %></h1>
+
+ 		<br>
+ 		<% @user_tweets.each do |tweet| %>
+  			<p> Latitude = <%= tweet["latitude"] %> Longitude =  <%= tweet["longitude"] %></p>
+  			<br>
+		<% end %>
+
+	<% else %>
+	<h1>You are not signed in</h1>
+	<% end %>

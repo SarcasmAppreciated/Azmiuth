@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-  has_many :authorizations
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  validates :name, :email, :presence => true
+  has_one :authorization, dependent: :destroy
+  has_one :preference, dependent: :destroy
+  has_many :tweets, dependent: :destroy
+  validates :name, :user_id, :presence => true
+  validates :user_id, uniqueness: true
 end
+
