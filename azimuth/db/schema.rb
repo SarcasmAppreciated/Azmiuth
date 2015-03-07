@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 20150307182251) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "preferences", force: :cascade do |t|
+    t.integer "user_id"
+    t.float   "destination_latitude"
+    t.float   "destination_longitude"
+  end
+
+  add_index "preferences", ["user_id"], name: "index_preferences_on_user_id"
+
   create_table "tweets", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "tweet_text"
