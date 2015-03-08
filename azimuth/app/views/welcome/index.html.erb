@@ -27,7 +27,15 @@
 		</div>
 		<div id="main">
 			<div id="map_wrapper">
-				<div id="chart"></div>
+				
+				<div id="chart">
+
+					<%= javascript_tag do %>
+					    icebergs = <%= raw @icebergs.to_json %>
+					<% end %>
+
+				</div>
+
 			</div>
 			<div class="content">
 				<% if user_signed_in? %>
