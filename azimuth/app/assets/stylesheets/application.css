@@ -125,13 +125,6 @@ a {
 	display: block;
 }
 
-#profile_box {
-	height: 400px;
-	width: 100%;
-	background-color: #999;
-	display: block;
-}
-
 .about_align {
 	margin-top: 25px;
 	margin-bottom: 25px;
@@ -146,28 +139,41 @@ a {
 	margin: 10px;
 }
 
-#table_wrapper {
+.table_wrapper {
 	height: auto;
 	width: 1000px;
 	display: inline-block;
 }
 
-#table_expand {
+.table_expand {
 	text-align: left;
 }
 
-#table_box {
+.table_box {
 	height: 0px;
 	width: 1000px;
 	display: block;
 	background-color: #999;
 }
 
-#x_box {
+.table_box.profile {
+	height: 250px;
+	background-color: rgba(0,0,0,.25);
+}
+
+.x_box {
 	display: inline-block;
 	font-size: 30px;
 	font-weight: 900;
 	cursor: pointer;
+}
+
+.x_box.profile {
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 
 #footer {
