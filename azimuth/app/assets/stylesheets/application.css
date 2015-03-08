@@ -102,7 +102,7 @@ a {
 #main {
 	height: auto;
 	width: 100%;
-	top: 75px;
+	margin-top: 75px;
 	display: block;
 	text-align: center;
 }
