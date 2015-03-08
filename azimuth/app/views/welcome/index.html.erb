@@ -31,6 +31,40 @@
 		</div>
 		<div id="main">
 			<div id="map_wrapper">
+				<div id="chart", style="
+				    border: 2px solid;
+				    border-radius: 25px;
+				    border-color: #888888;
+				    display: inline-block;
+				    background-color: yellow;
+				    margin: 100px 100px;
+				    box-shadow: 10px 10px 5px #888888;">
+
+				    <table id="iceberg_table", style="margin: 10px 10px 10px 10px">
+				    	<tr>Berg_number Latitude Longitude
+				    	</tr>
+				    </table>
+
+					<%= javascript_tag do %>
+					    icebergs = <%= raw @icebergs.to_json %>
+					<% end %>
+
+					<script> 
+
+					    function putText(icebergs) {
+						    var tbl = document.getElementById("iceberg_table");
+						    for(var i = 0; i < icebergs.length; i++){
+						        var row = tbl.insertRow();
+						        var cell = row.insertCell();
+						        var berg = icebergs[i];
+						        cell.innerHTML = berg.berg_number + " " + berg.latitude + " " + berg.longitude;
+					     	}
+					 	}
+
+						putText(icebergs);
+
+					</script>
+				</div>
 			</div>
 			<div class="content_realignment">
 				<div class="title_box">
