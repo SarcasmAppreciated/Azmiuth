@@ -2,7 +2,7 @@
 
 one:
   berg_number: 1
-  time: 2015-03-07 14:31:02
+  date: 2015-03-08
   latitude: 1.5
   longitude: 1.5
   size: MyString
@@ -10,7 +10,7 @@ one:
 
 two:
   berg_number: 1
-  time: 2015-03-07 14:31:02
+  date: 2015-03-08
   latitude: 1.5
   longitude: 1.5
   size: MyString
