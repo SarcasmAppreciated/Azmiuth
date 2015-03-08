@@ -7,6 +7,7 @@ html, body {
 	width: 100%;
 	height: auto;
 	font-family: 'Lato', Arial, Sans Serif;
+	background-color: #BBB;
 }
 
 h1 {
@@ -16,7 +17,6 @@ h1 {
 }
 
 h2 {
-	display: inline;
 }
 
 span {
@@ -33,7 +33,7 @@ a {
 	width: 100%;
 	display: block;
 	background-color: #FFF;
-	position: absolute;
+	position: fixed;
 	top: 0;
 }
 
@@ -68,7 +68,7 @@ a {
 	border-radius: 3px;
 	border: none;
 	background-color: #666;
-	color: #fff;
+	color: #FFF;
 	font-family: 'code_boldregular';
 	line-height: 40px;
 	text-align: center;
@@ -96,14 +96,21 @@ a {
 	box-shadow: 0 2px 2px #666;
 	border-radius: 3px;
 	background-color: #999;
-  overflow: hidden;
+	overflow: hidden;
 }
 
 #main {
 	height: auto;
 	width: 100%;
+	top: 75px;
 	display: block;
 	text-align: center;
+}
+
+#about_background {
+	height: auto;
+	width: 100%;
+	display: block;
 }
 
 .content_realignment {
@@ -112,23 +119,35 @@ a {
 	display: inline-block;
 }
 
-.title_box {
-  height: 60px;
-  width: 1000px;
-  display: inline-block;
-	margin-top: -5px;
-  text-align: left;
-}
-
 #map_wrapper {
-	height: 650px;
+	height: 550px;
 	width: 100%;
-	background-color: #666;
 	display: block;
 }
 
-#table_wrapper {
+#profile_box {
 	height: 400px;
+	width: 100%;
+	background-color: #999;
+	display: block;
+}
+
+.about_align {
+	margin-top: 25px;
+	margin-bottom: 25px;
+	text-align: left;
+	background-color: rgba(255,255,255,.5);
+}
+
+.text_align {
+	height: auto;
+	width: 980px;
+	display: block;
+	margin: 10px;
+}
+
+#table_wrapper {
+	height: auto;
 	width: 1000px;
 	display: inline-block;
 }
@@ -189,3 +208,14 @@ input[type="twitter-button"]
     font-style: normal;
 
 }
+
+/* MAP */
+#chart {
+	height: 100%;
+	width: 100%;
+	display: block;
+}
+path { fill: #ccc; stroke: #F60; }
+circle { stroke-width:0.5px; vector-effect:non-scaling-stroke }
+circle.f { stroke:#FFFFFF; fill-opacity: 0.8}
+circle.m { stroke:#FFFFFF; fill-opacity: 0.8}
