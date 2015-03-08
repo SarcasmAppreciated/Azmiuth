@@ -1,7 +1,8 @@
 class WelcomeController < ApplicationController
   def index
     @user = current_user
-    @icebergs = Iceberg.all
+    month_day = Date.today.strftime("%d-%m")
+    @icebergs = Iceberg.where("strftime('%d-%m', date) = ?", month_day)
   end
 
   def user_signed_in
