@@ -7,6 +7,7 @@ html, body {
 	width: 100%;
 	height: auto;
 	font-family: 'Lato', Arial, Sans Serif;
+	background-color: #BBB;
 }
 
 h1 {
@@ -16,7 +17,6 @@ h1 {
 }
 
 h2 {
-	display: inline;
 }
 
 span {
@@ -68,7 +68,7 @@ a {
 	border-radius: 3px;
 	border: none;
 	background-color: #666;
-	color: #fff;
+	color: #FFF;
 	font-family: 'code_boldregular';
 	line-height: 40px;
 	text-align: center;
@@ -102,7 +102,7 @@ a {
 #main {
 	height: auto;
 	width: 100%;
-	margin-top: 75px;
+	top: 75px;
 	display: block;
 	text-align: center;
 }
@@ -119,17 +119,9 @@ a {
 	display: inline-block;
 }
 
-.title_box {
-  height: 60px;
-  width: 1000px;
-  display: inline-block;
-  text-align: left;
-}
-
 #map_wrapper {
-	height: 650px;
+	height: 550px;
 	width: 100%;
-	background-color: #666;
 	display: block;
 }
 
@@ -144,6 +136,14 @@ a {
 	margin-top: 25px;
 	margin-bottom: 25px;
 	text-align: left;
+	background-color: rgba(255,255,255,.5);
+}
+
+.text_align {
+	height: auto;
+	width: 980px;
+	display: block;
+	margin: 10px;
 }
 
 #table_wrapper {
@@ -210,7 +210,12 @@ input[type="twitter-button"]
 }
 
 /* MAP */
+#chart {
+	height: 100%;
+	width: 100%;
+	display: block;
+}
 path { fill: #ccc; stroke: #F60; }
 circle { stroke-width:0.5px; vector-effect:non-scaling-stroke }
-circle.f { stroke:#ffffff; fill-opacity: 0.8}
-circle.m { stroke:#ffffff; fill-opacity: 0.8}
+circle.f { stroke:#FFFFFF; fill-opacity: 0.8}
+circle.m { stroke:#FFFFFF; fill-opacity: 0.8}
