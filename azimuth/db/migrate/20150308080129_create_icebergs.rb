@@ -2,7 +2,7 @@ class CreateIcebergs < ActiveRecord::Migration
   def change
     create_table :icebergs do |t|
       t.integer :berg_number
-      t.datetime :time
+      t.date :date
       t.float :latitude
       t.float :longitude
       t.string :size

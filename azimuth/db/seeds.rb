@@ -12,31 +12,31 @@ require 'time'
 
 csv_file_name = Rails.root.join("db", "IIP_2014IcebergSeason.csv").to_s
 
-# Read CSV file
+puts "Checkpoint 1"
+
 csv_text = File.read(csv_file_name)
 csv = CSV.parse(csv_text, :headers => true)
 
-# Create database entries
-csv.each do |row|
-	berg_number = row[1].to_i
-	#date = Date.strptime(row[2], )
-	time = Time.strptime("#{row[2]} #{row[3]}", "%m/%d/%Y %H%M")
-	latitude = row[4].to_f
-	longitude = row[5].to_f
-	size = row[7]
-	shape = row[8]
+iceberg_array = Array.new
 
-	if(time.month == Date.today.month && 
-		time.day == Date.today.day)
+ActiveRecord::Base.transaction do
+
+	# Create database entries
+	csv.each do |row|
+		berg_number = row[1].to_i
+		date = Date.strptime(row[2], "%m/%d/%Y")
+		latitude = row[4].to_f
+		longitude = row[5].to_f
+		size = row[7]
+		shape = row[8]
 
 		Iceberg.create(
 			berg_number: berg_number,
-			time: time,
+			date: date,
 			latitude: latitude,
 			longitude: longitude,
 			size: size,
-			shape: shape
-			)
+			shape: shape );
 	end
 
 end
