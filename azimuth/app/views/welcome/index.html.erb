@@ -27,24 +27,22 @@
 		</div>
 		<div id="main">
 			<div id="map_wrapper">
-				
-				<div id="chart">
-
-					<%= javascript_tag do %>
-					    icebergs = <%= raw @icebergs.to_json %>
-					<% end %>
-
-				</div>
-
+				<div id="chart"></div>
+				<%= javascript_tag do %>
+					icebergs = <%= raw @icebergs.to_json %>
+				<% end %>
 			</div>
 			<div class="content">
 				<% if user_signed_in? %>
 					<div class="content_realignment">
-						<div id="profile_box">
+						<div class="table_wrapper profile">
+							<div class="table_expand profile"><h2 style="display: inline">Profile </h2><span class="slide_span profile" style="display: inline-block; width: 895px"></span><div class="x_box profile">+</div></div>
+							<div class="table_box profile">
+							</div>
 						</div>
-						<div id="table_wrapper">
-							<div id="table_expand"><h2>Coordinate Table </h2><span id="slide_span" style="display: inline-block; width: 10px"></span><div id="x_box">+</div></div>
-							<div id="table_box">
+						<div class="table_wrapper">
+							<div class="table_expand"><h2 style="display: inline">Coordinate Table </h2><span class="slide_span table" style="display: inline-block; width: 10px"></span><div class="x_box table">+</div></div>
+							<div class="table_box table">
 							</div>
 						</div>
 					</div>
@@ -74,21 +72,31 @@
 		
 		<script>
 			$(document).ready(function(){	
-				var isOpen = false;
-				$("#x_box").click(function() {
-					if(isOpen) {
-						expand_table(10,0,0);
-						isOpen = false;
-					}
-					else {
-						expand_table(775,250,45)
-						isOpen = true;
-					}
+				var profileIsOpen = true;
+				var tableIsOpen = false;
+				
+				$(".x_box.profile").click(function() {
+					check_Open(profileIsOpen, 875, ".profile");
+					profileIsOpen = !profileIsOpen;
 				});
 				
-				function expand_table(x, y, z) {
-					$("#slide_span").animate({width: x + "px" }, "fast",function(){
-						$('#x_box').css({
+				$(".x_box.table").click(function() {
+					check_Open(tableIsOpen, 775, ".table");
+					tableIsOpen = !tableIsOpen;
+				});
+				
+				function check_Open(isOpen, x, y){
+					if(isOpen) {
+						expand_table(10,0,0,y);
+					}
+					else {
+						expand_table(x,250,45,y)
+					}
+				}		
+				
+				function expand_table(x, y, z, a) {
+					$(".slide_span" + a + "").animate({width: x + "px" }, "fast",function(){
+						$(".x_box" + a + "").css({
 							 '-moz-transform':'rotate(' + z + 'deg)',
 							 '-webkit-transform':'rotate(' + z + 'deg)',
 							 '-o-transform':'rotate(' + z + 'deg)',
@@ -96,7 +104,7 @@
 							 'transform':'rotate(' + z + 'deg)'
 						});
 					});
-					$("#table_box").animate({height: y + "px" }, "slow",function(){
+					$(".table_box" + a + "").animate({height: y + "px" }, "slow",function(){
 						// $("#signupform").fadeIn("slow");
 					});
 				}
