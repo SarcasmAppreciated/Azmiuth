@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 	<head>
@@ -9,16 +9,12 @@
 		
 		<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no">
 		
-		<!--<link rel="stylesheet" href="css/main.css">
-		<link rel="stylesheet" href="fonts/font_stylesheet.css">-->
-		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-
-		<script src="scripts/jquery.min.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>	
 
 		<!--Thank you to Fontfabric for the use of Code Light and Code Bold fonts-->
-
-	</head>
-	<body>
+		
+	<!--</head>
+	<body>-->
 		<div id="header">
 			<div id="logo">A</div>
 			<% if user_signed_in? %>
@@ -31,6 +27,7 @@
 		</div>
 		<div id="main">
 			<div id="map_wrapper">
+				<div id="chart"></div>
 			</div>
 			<% if user_signed_in? %>
 				<div class="content_realignment">
@@ -91,6 +88,7 @@
 						// $("#signupform").fadeIn("slow");
 					});
 				}
+				
 			});
 		</script>
 	</body>
