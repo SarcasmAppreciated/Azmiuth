@@ -77,11 +77,15 @@ a {
 .login_button.destroy {
 	width: 48px;
 	height: 48px;
-	margin-right: 20px;
 	background: url("destroy.png") center no-repeat ;
+	background-color: #FFF;
 	background-size: 40px 40px;
-	margin-top: 13.5px;
-	margin-bottom: 13.5px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	float: none;
+	display: inline-block;
+	
 }
 
 #avatar {
@@ -176,6 +180,31 @@ a {
 	transform: rotate(45deg);
 }
 
+.profile_horizontal {
+	height: auto;
+	width: 155px;
+	display: block;
+	float: left;
+	text-align: center;
+}
+
+.profile_picture {
+	height: 128px;
+	width: 128px;
+	margin-top: 10px;
+	display: inline-block;
+	border: 3px solid #1c74f8;
+	border-radius: 5%;
+	overflow: hidden;
+}
+
+h3.profile_name {
+	height: 20px;
+	width: 100%;
+	margin-top: 5px;
+	display: inline-block;
+}
+
 #footer {
 	height: 75px;
 	width: 100%;
@@ -220,6 +249,7 @@ input[type="twitter-button"]
 	height: 100%;
 	width: 100%;
 	display: block;
+	cursor: move;
 }
 path { fill: #ccc; stroke: #F60; }
 circle { stroke-width:0.5px; vector-effect:non-scaling-stroke }
