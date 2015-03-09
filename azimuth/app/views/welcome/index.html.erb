@@ -19,7 +19,6 @@
 			<div id="logo">A</div>
 			<% if user_signed_in? %>
 				<a href="/auth/logout"><div class="login_button">Logout</div></a>
-				<a href="/auth/destroy"><div class="login_button destroy"></div></a>
 				<div id="avatar"><%= image_tag(current_user.profile_image_url, :width => 48, :height => 48) %></div>
 			<% else %>		
 				<a href="/auth/twitter"><div class="login_button">Login</div></a>
@@ -38,6 +37,11 @@
 						<div class="table_wrapper profile">
 							<div class="table_expand profile"><h2 style="display: inline">Profile </h2><span class="slide_span profile" style="display: inline-block; width: 895px"></span><div class="x_box profile">+</div></div>
 							<div class="table_box profile">
+								<div class="profile_horizontal profile">
+									<h3 class="profile_name sensitive profile"><%=current_user.name=%></h3> <!-- Evenutally switch to link to Twitter Profile -->
+									<div class="profile_picture sensitive profile" style="display: inline-block"><%= image_tag(current_user.profile_image_url, :width => 128, :height => 128) %></div>									
+									<a href="/auth/destroy"><div class="login_button destroy sensitive profile"></div></a>
+								</div>
 							</div>
 						</div>
 						<div class="table_wrapper">
@@ -88,9 +92,11 @@
 				function check_Open(isOpen, x, y){
 					if(isOpen) {
 						expand_table(10,0,0,y);
+						$(".sensitive" + y).fadeOut("fast");						
 					}
 					else {
 						expand_table(x,250,45,y)
+						$(".sensitive" + y).fadeIn("slow");
 					}
 				}		
 				
@@ -104,9 +110,7 @@
 							 'transform':'rotate(' + z + 'deg)'
 						});
 					});
-					$(".table_box" + a + "").animate({height: y + "px" }, "slow",function(){
-						// $("#signupform").fadeIn("slow");
-					});
+					$(".table_box" + a + "").animate({height: y + "px" }, "slow",function(){});
 				}
 				
 			});
