@@ -157,14 +157,13 @@ a {
 	height: 0px;
 	width: 1000px;
 	display: block;
-	background-color: #999;
+	background-color: rgba(255,255,255,.25);
 	overflow-y: scroll;
 	text-align: center;
 }
 
 .table_box.profile {
 	height: 250px;
-	background-color: rgba(255,255,255,.25);
 	overflow: hidden;
 }
 
@@ -219,7 +218,7 @@ p.text_split_title {
 
 .coordinate_table {
 	list-style-type: none;
-	margin: 30px;
+	margin: 20px;
 }
 
 .coordinate {
@@ -227,8 +226,9 @@ p.text_split_title {
 	width: 100px;
 	display: block-inline;
 	float: left;
-	color: #BBB;
-	border: solid 1px #BBB;
+	color: #FFF;
+	border: solid 1px #FFF;
+	margin: 1px;
 }
 
 #footer {
