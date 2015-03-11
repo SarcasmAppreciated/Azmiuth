@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'devise', :github => 'plataformatec/devise'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -51,8 +53,6 @@ group :development, :test do
   gem 'omniauth', :github => 'intridea/omniauth'
 
   gem 'omniauth-twitter', :github => 'arunagw/omniauth-twitter'
-
-  gem 'devise', :github => 'plataformatec/devise'
 
   gem 'twitter', '~> 5.3.1'
 end
