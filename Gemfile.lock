@@ -83,6 +83,8 @@ GEM
       execjs
     coffee-script-source (1.9.1)
     columnize (0.9.0)
+    d3-rails (3.5.5)
+      railties (>= 3.1)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     descendants_tracker (0.0.4)
@@ -221,6 +223,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
+  d3-rails
   devise!
   jbuilder (~> 2.0)
   jquery-rails
@@ -232,7 +235,6 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
-  sprockets
   sqlite3
   turbolinks
   twitter (~> 5.3.1)
