@@ -15,6 +15,9 @@
 		
 	</head>
 	<body>-->
+		<%= javascript_tag do %>
+			icebergs = <%= raw @icebergs.to_json %>
+		<% end %>
 		<div id="header">
 			<div id="logo">A</div>
 			<% if user_signed_in? %>
@@ -27,9 +30,6 @@
 		<div id="main">
 			<div id="map_wrapper">
 				<div id="chart"></div>
-				<%= javascript_tag do %>
-					icebergs = <%= raw @icebergs.to_json %>
-				<% end %>
 			</div>
 			<div class="content">
 				<% if user_signed_in? %>
@@ -37,16 +37,25 @@
 						<div class="table_wrapper profile">
 							<div class="table_expand profile"><h2 style="display: inline">Profile </h2><span class="slide_span profile" style="display: inline-block; width: 895px"></span><div class="x_box profile">+</div></div>
 							<div class="table_box profile">
-								<div class="profile_horizontal profile">
-									<h3 class="profile_name sensitive profile"><%=current_user.name=%></h3> <!-- Evenutally switch to link to Twitter Profile -->
-									<div class="profile_picture sensitive profile" style="display: inline-block"><%= image_tag(current_user.profile_image_url, :width => 128, :height => 128) %></div>									
-									<a href="/auth/destroy"><div class="login_button destroy sensitive profile"></div></a>
+								<div class="profile_horizontal sensitive profile">
+									<div class="profile_picture sensitive profile" style="display: inline-block"><%= image_tag(current_user.profile_image_url, :width => 128, :height => 128) %></div>
+								</div>
+								<div class="profile_horizontal sensitive profile">
+									<div class="text_split profile sensitive" style="margin-top: 20px">
+										<p class="text_split_title sensitive profile" style="color: #999">User:</p>
+										<h3 class="sensitive profile"><%=current_user.name=%></h3> <!--  Evenutally switch to link to Twitter Profile -->	
+									</div>
+									<div class="text_split profile sensitive" style="margin-top: 20px">
+										<p class="text_split_title sensitive profile" style="color: #999">Quit:</p>
+										<a href="/auth/destroy"><h3 class="sensitive profile" style="font-size: 16px">Deactivate Account</h3></a> <!--  Evenutally switch to link to Twitter Profile -->	
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="table_wrapper">
 							<div class="table_expand"><h2 style="display: inline">Coordinate Table </h2><span class="slide_span table" style="display: inline-block; width: 10px"></span><div class="x_box table">+</div></div>
 							<div class="table_box table">
+								<ul class="coordinate_table sensitive table"></ul>
 							</div>
 						</div>
 					</div>
@@ -75,7 +84,7 @@
 		</div>
 		
 		<script>
-			$(document).ready(function(){	
+			$(document).ready(function(){		
 				var profileIsOpen = true;
 				var tableIsOpen = false;
 				
@@ -89,18 +98,20 @@
 					tableIsOpen = !tableIsOpen;
 				});
 				
+				append_Table();
+				
 				function check_Open(isOpen, x, y){
 					if(isOpen) {
-						expand_table(10,0,0,y);
+						expand_Table(10,0,0,y);
 						$(".sensitive" + y).fadeOut("fast");						
 					}
 					else {
-						expand_table(x,250,45,y)
+						expand_Table(x,250,45,y)
 						$(".sensitive" + y).fadeIn("slow");
 					}
-				}		
+				}				
 				
-				function expand_table(x, y, z, a) {
+				function expand_Table(x, y, z, a) {
 					$(".slide_span" + a + "").animate({width: x + "px" }, "fast",function(){
 						$(".x_box" + a + "").css({
 							 '-moz-transform':'rotate(' + z + 'deg)',
@@ -113,6 +124,11 @@
 					$(".table_box" + a + "").animate({height: y + "px" }, "slow",function(){});
 				}
 				
+				function append_Table() {
+					for(var i = 0; i < icebergs.length; i++) {
+						$(".coordinate_table").append("<li class='coordinate sensitive table'>" + icebergs[i].latitude +  ", " + icebergs[i].longitude +  "</li>");
+					}
+				}				
 			});
 			
 			$(document).ready(function(){
