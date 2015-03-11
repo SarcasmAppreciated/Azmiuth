@@ -1,0 +1,285 @@
+html,body,div,h1,h2,h3,p,ul,li,a,img{
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	width: 100%;
+	height: auto;
+	font-family: 'Lato', Arial, Sans Serif;
+	background-color: #BBB;
+}
+
+h1 {
+	font-family: 'code_lightregular', 'Lato', Arial, Sans Serif;
+	display: inline;
+	font-size: 60px;
+}
+
+h2 {
+}
+
+span {
+	display: inline-block;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+#header {
+	height: auto;
+	width: 100%;
+	display: block;
+	background-color: #FFF;
+	position: fixed;
+	top: 0;
+}
+
+#logo {
+	height: 48px;
+	width: 48px;
+	margin-left: 25%;
+	margin-top: 13.5px;
+	margin-bottom: 13.5px;
+	display: inline-block;
+	-webkit-box-shadow: 0 2px 2px #666;
+	box-shadow: 0 2px 2px #666;
+	border-radius: 3px;
+	background-color: #FFF;
+	
+	text-align: center;
+	line-height: 48px;
+	font-size: 48px;
+	font-family: 'code_boldregular', 'Lato', Arial, Sans Serif;
+}
+
+.login_button {
+	height: 40px;
+	width: 70px;
+	float: right;
+	margin-right: 25%;	
+	margin-top: 19.5px;
+	margin-bottom: 19.5px;
+	display: inline;
+	-webkit-box-shadow: 0 2px 2px #666;
+	box-shadow: 0 2px 2px #666;
+	border-radius: 3px;
+	border: none;
+	background-color: #666;
+	color: #FFF;
+	font-family: 'code_boldregular';
+	line-height: 40px;
+	text-align: center;
+}
+
+.login_button.destroy {
+	width: 48px;
+	height: 48px;
+	background: url("destroy.png") center no-repeat ;
+	background-color: #FFF;
+	background-size: 40px 40px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	float: none;
+	display: inline-block;
+	
+}
+
+#avatar {
+	height: 48px;
+	width: 48px;
+	float: right;
+	margin-right: 20px;
+	margin-top: 13.5px;
+	margin-bottom: 13.5px;
+	display: inline;
+	-webkit-box-shadow: 0 2px 2px #666;
+	box-shadow: 0 2px 2px #666;
+	border-radius: 3px;
+	background-color: #999;
+	overflow: hidden;
+}
+
+#main {
+	height: auto;
+	width: 100%;
+	margin-top: 75px;
+	display: block;
+	text-align: center;
+}
+
+#about_background {
+	height: auto;
+	width: 100%;
+	display: block;
+}
+
+.content_realignment {
+	height: auto;
+	width: 1000px;
+	display: inline-block;
+}
+
+#map_wrapper {
+	height: 550px;
+	width: 100%;
+	display: block;
+}
+
+.about_align {
+	margin-top: 25px;
+	margin-bottom: 25px;
+	text-align: left;
+	background-color: rgba(255,255,255,.5);
+}
+
+.text_align {
+	height: auto;
+	width: 980px;
+	display: block;
+	margin: 10px;
+}
+
+.table_wrapper {
+	height: auto;
+	width: 1000px;
+	display: inline-block;
+}
+
+.table_expand {
+	text-align: left;
+}
+
+.table_box {
+	height: 0px;
+	width: 1000px;
+	display: block;
+	background-color: #999;
+	overflow-y: scroll;
+	text-align: center;
+}
+
+.table_box.profile {
+	height: 250px;
+	background-color: rgba(255,255,255,.25);
+	overflow: hidden;
+}
+
+.x_box {
+	display: inline-block;
+	font-size: 30px;
+	font-weight: 900;
+	cursor: pointer;
+}
+
+.x_box.profile {
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.profile_horizontal {
+	height: auto;
+	width: 155px;
+	margin-left: 10px;
+	display: block;
+	float: left;
+	text-align: center;
+}
+
+.profile_picture {
+	height: 128px;
+	width: 128px;
+	margin-top: 20px;
+	display: inline-block;
+	border: 3px solid #1c74f8;
+	border-radius: 5%;
+	overflow: hidden;
+}
+
+.text_split {
+	height: 40px;
+	width: 100%;
+	display: block;
+	padding: 5px;
+	background-color: rgba(255,255,255,.25);
+	border-bottom: solid 1px #FFF;
+	text-align: left;
+}
+
+p.text_split_title {
+	color: #666;
+	font-family: 'code_lightregular', 'Lato', Arial, Sans Serif; 
+}
+
+.coordinate_table {
+	list-style-type: none;
+	margin: 30px;
+}
+
+.coordinate {
+	height: 20px;
+	width: 100px;
+	display: block-inline;
+	float: left;
+	color: #BBB;
+	border: solid 1px #BBB;
+}
+
+#footer {
+	height: 75px;
+	width: 100%;
+	background-color: #333;
+	display: block;
+}
+
+input[type="twitter-button"]
+{
+  background:url(sign-in-with-twitter-gray.png);
+  text-indent: -9999em;
+}
+
+@font-face {
+    font-family: 'code_boldregular';
+    src: url('/assets/code_bold-webfont.eot');
+    src: url('/assets/code_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/code_bold-webfont.woff2') format('woff2'),
+         url('/assets/code_bold-webfont.woff') format('woff'),
+         url('/assets/code_bold-webfont.ttf') format('truetype'),
+         url('/assets/code_bold-webfont.svg#code_boldregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'code_lightregular';
+    src: url('/assets/code_light-webfont.eot');
+    src: url('/assets/code_light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/code_light-webfont.woff2') format('woff2'),
+         url('/assets/code_light-webfont.woff') format('woff'),
+         url('/assets/code_light-webfont.ttf') format('truetype'),
+         url('/assets/code_light-webfont.svg#code_lightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/* MAP */
+#chart {
+	height: 100%;
+	width: 100%;
+	display: block;
+	cursor: move;
+}
+
+svg {overflow: visible}
+path { fill: #ccc; stroke: #F60; }
+circle { stroke-width:0.5px; vector-effect:non-scaling-stroke }
+circle.f { stroke:#FFFFFF; fill-opacity: 0.8}
+circle.m { stroke:#FFFFFF; fill-opacity: 0.8}
