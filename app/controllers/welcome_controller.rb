@@ -3,8 +3,9 @@ require 'time'
 class WelcomeController < ApplicationController
   def index
     @user = current_user
-    month_day = Date.today.strftime("%d-%m")
-    @icebergs = Iceberg.where("strftime('%d-%m', date) = ?", month_day)
+    month = Date.today.strftime("%m")
+    day = Date.today.strftime("%d")
+    @icebergs = Iceberg.query_by_month_day(month, day)
     if user_signed_in
       @user_tweets = @user.tweets(:sort){:time_stamp}
     else
