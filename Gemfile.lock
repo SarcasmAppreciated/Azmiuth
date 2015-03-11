@@ -232,6 +232,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
+  sprockets
   sqlite3
   turbolinks
   twitter (~> 5.3.1)
