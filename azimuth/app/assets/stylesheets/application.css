@@ -158,11 +158,14 @@ a {
 	width: 1000px;
 	display: block;
 	background-color: #999;
+	overflow-y: scroll;
+	text-align: center;
 }
 
 .table_box.profile {
 	height: 250px;
-	background-color: rgba(0,0,0,.25);
+	background-color: rgba(255,255,255,.25);
+	overflow: hidden;
 }
 
 .x_box {
@@ -183,6 +186,7 @@ a {
 .profile_horizontal {
 	height: auto;
 	width: 155px;
+	margin-left: 10px;
 	display: block;
 	float: left;
 	text-align: center;
@@ -191,18 +195,40 @@ a {
 .profile_picture {
 	height: 128px;
 	width: 128px;
-	margin-top: 10px;
+	margin-top: 20px;
 	display: inline-block;
 	border: 3px solid #1c74f8;
 	border-radius: 5%;
 	overflow: hidden;
 }
 
-h3.profile_name {
-	height: 20px;
+.text_split {
+	height: 40px;
 	width: 100%;
-	margin-top: 5px;
-	display: inline-block;
+	display: block;
+	padding: 5px;
+	background-color: rgba(255,255,255,.25);
+	border-bottom: solid 1px #FFF;
+	text-align: left;
+}
+
+p.text_split_title {
+	color: #666;
+	font-family: 'code_lightregular', 'Lato', Arial, Sans Serif; 
+}
+
+.coordinate_table {
+	list-style-type: none;
+	margin: 30px;
+}
+
+.coordinate {
+	height: 20px;
+	width: 100px;
+	display: block-inline;
+	float: left;
+	color: #BBB;
+	border: solid 1px #BBB;
 }
 
 #footer {
@@ -251,6 +277,8 @@ input[type="twitter-button"]
 	display: block;
 	cursor: move;
 }
+
+svg {overflow: visible}
 path { fill: #ccc; stroke: #F60; }
 circle { stroke-width:0.5px; vector-effect:non-scaling-stroke }
 circle.f { stroke:#FFFFFF; fill-opacity: 0.8}
