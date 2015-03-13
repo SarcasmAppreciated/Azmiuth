@@ -24,8 +24,6 @@ var path = d3.geo.path()
   .attr("class", "hoverinfo")
   .style("visibility", "hidden");
 
-var bubble_data;
-
 var g = svg.append("g");
 
 // load and display the World
@@ -69,7 +67,7 @@ function plot_bubbles(bubble_data) {
       });
 }
 
-var bubble_data2 = d3.text("IIP_2014IcebergSeason.csv", function(text) {
+var bubble_data = d3.text("IIP_2014IcebergSeason.csv", function(text) {
     bubble_data = d3.csv.parse(text);
     plot_bubbles(bubble_data);
     });
