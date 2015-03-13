@@ -43,22 +43,22 @@ function create_tooltip_message(bubble_data) {
 }
 
 function plot_bubbles(bubble_data) {
-  svg.append("g")
+  svg.selectAll("g")
     .attr("class", "bubble")
     .selectAll("circle")
     .data(bubble_data)
     .enter().append("circle")
     .attr("transform", function(d) {
-        dat = [d.LONGITUDE, d.LATITUDE];
-        return "translate(" + projection(dat) + ")"; 
-        })
+      dat = [d.LONGITUDE, d.LATITUDE];
+      return "translate(" + projection(dat) + ")"; 
+      })
   .attr("r", function(d) {
       return bubble_radius;
       })
-    .on("mouseover", function(d){
-        tooltip.html(create_tooltip_message(d));
-        return tooltip.style("visibility", "visible");
-        })
+  .on("mouseover", function(d){
+      tooltip.html(create_tooltip_message(d));
+      return tooltip.style("visibility", "visible");
+      })
   .on("mousemove", function(){
       return tooltip.style("top",(d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
       })
@@ -81,4 +81,3 @@ var zoom = d3.behavior.zoom()
       });
 
 svg.call(zoom)
-
