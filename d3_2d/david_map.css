@@ -1,0 +1,81 @@
+
+/* CSS goes here. */
+
+/*path {
+  fill: none;
+  stroke: #000;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+*/
+
+path {
+  stroke: white;
+  stroke-width: 0.25px;
+  fill: grey;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+/* country boundary */
+.land {
+  fill: #AAAAAA;
+}
+
+.border {
+  fill: none;
+  stroke: #FBFBFB;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.fill {
+  fill: #fff;
+}
+
+.stroke {
+  fill: none;
+  stroke: #000;
+  stroke-width: 3px;
+}
+
+.bubble {
+  fill-opacity: .7;
+  stroke: #fff;
+  stroke-width: .5px;
+}
+
+.graticule {
+  fill: none;
+  stroke: #777;
+  stroke-width: .5px;
+  stroke-opacity: .5;
+}
+
+body {
+  background: #fcfcfa;
+}
+
+/* Hover info */
+.hoverinfo {
+    padding: 4px; 
+    border-radius: 1px; 
+    background-color: #FFF; 
+    box-shadow: 1px 1px 5px #CCC; 
+    font-size: 12px; 
+    border: 1px solid #CCC; 
+}
+
+.hoverinfo hr {
+    border:1px dotted #CCC; 
+}
