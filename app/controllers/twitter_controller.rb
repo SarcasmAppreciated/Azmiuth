@@ -1,6 +1,16 @@
 class TwitterController < ApplicationController
     require "twitter"
-    @@number_of_tweets_to_pull = 5
+    @@number_of_tweets_to_pull = 20
+
+    public
+
+    def update_all_users_aux
+        User.all.each do |user|
+            update_user_tweets(user, @@number_of_tweets_to_pull)
+        end
+    end
+    
+    private 
 
     def get_client(user)
         auth = user.authorization
@@ -18,6 +28,12 @@ class TwitterController < ApplicationController
         client.update(message)
     end
 
+    #useless method meant to seed database
+    def push_tweet_with_geo(user, message, input_lat, input_long)
+        client = get_client(user)
+        client.update(message, {:lat=> input_lat, :long=> input_long})
+    end
+
     def pull_last_n_tweets(user, n)
         client = get_client(user)
         responses = client.user_timeline({count: n})
@@ -32,16 +48,24 @@ class TwitterController < ApplicationController
     end
 
     def update_current_user
-        user = current_user
-        update_user_tweets(user, @@number_of_tweets_to_pull)
+        update_current_user_aux
         redirect_to '/twitter/'
     end
 
+    def update_current_user_aux
+        user = current_user
+        update_user_tweets(user, @@number_of_tweets_to_pull)
+    end
+
     def update_all_users
+        update_all_users_aux
+        redirect_to '/twitter/'
+    end
+
+    def update_all_users_aux
         User.all.each do |user|
             update_user_tweets(user, @@number_of_tweets_to_pull)
         end
-       redirect_to '/twitter/'
     end
 
     #Do not EVER send duplicate tweets! EVER!!! 
@@ -50,9 +74,16 @@ class TwitterController < ApplicationController
         user = current_user
         message = "Hello #{user.name}! "
         #Twitter's API forbids sending duplicate tweets
-        r = rand(1000)
+        r = rand(10000)
         message += r.to_s
         pushTweet(user, message)
+        #############################
+        #Code only used to seed database 
+        #input_lat = 55.836421
+        #input_long = -48.881295
+        #push_tweet_with_geo(user, message, input_lat, input_long)
+        #update_current_user_aux
+        #############################
         redirect_to '/twitter/'
     end
 

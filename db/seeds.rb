@@ -39,4 +39,16 @@ ActiveRecord::Base.transaction do
 			shape: shape );
 	end
 
+
 end
+
+puts "Checkpoint 2"
+ActiveRecord::Base.transaction do
+	user1 = User.new :name => "user_1", :user_id => 3097444134, :profile_image_url => "http://pbs.twimg.com/profile_images/578475341674483712/WC7EOrl_.jpeg"
+	user1.build_authorization :secret => "VujS31mFfrnSZR4rp991EjWYiPSlANQuQZRylbsejeONh", :token => "3097444134-RnOqYmq7BHkkl574n1fu1hK1lGVlmxeNggbNb6K"
+	user1.build_preference 
+	user1.save!
+end
+Tweet.update_all_users_aux
+
+
