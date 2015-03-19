@@ -52,9 +52,9 @@ ActiveRecord::Schema.define(version: 20150308080129) do
   add_index "tweets", ["user_id"], name: "index_tweets_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string  "name",              default: "", null: false
-    t.string  "profile_image_url", default: "", null: false
-    t.integer "user_id"
+    t.string  "name",                        default: "", null: false
+    t.string  "profile_image_url",           default: "", null: false
+    t.integer "user_id",           limit: 8
   end
 
   add_index "users", ["user_id"], name: "index_users_on_user_id", unique: true
