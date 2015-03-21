@@ -1,5 +1,5 @@
 // Pretty circles --------->
-
+/*
 color = d3.scale.linear()
 	.domain([12, 30])
 	.range(["red", "green"]);  
@@ -180,3 +180,4 @@ function plot_bubbles(bubble_data) {
 			return tooltip.style("visibility", "hidden");
 			});
 }
+*/

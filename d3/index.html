@@ -30,7 +30,6 @@ var countryFeature;
 var datacentreFeature;
 
 var projection = d3.geo.azimuthal()
-             //.scale(300)
              .scale(600)
              .origin([-71.03,42.37])
              .mode('orthographic')
@@ -38,7 +37,6 @@ var projection = d3.geo.azimuthal()
 
 var circle = d3.geo.greatCircle().origin(projection.origin());
 
-// TODO fix d3.geo.azimuthal to be consistent with scale
 var scale = {  orthographic: 380,  stereographic: 380,  gnomonic: 380,  
              equidistant: 380 / Math.PI * 2,  equalarea: 380 / Math.SQRT2};
 
@@ -142,12 +140,6 @@ function refresh(duration) {
     countryFeature.transition().duration(duration) 
     : countryFeature)
       .attr('d', clip);
- 
-//  (duration ? 
-//    datacentreFeature.transition().duration(duration) 
-//    : datacentreFeature)
-//      .attr('transform', function (d) { return "translate(" + clip(d) + ")"; });
-//   
 }
 
 function clip(d) {  
@@ -164,7 +156,6 @@ function assignClass (datum) {
 
 
 function create_tooltip_message(bubble_data) {
-    //ICE-YEAR,BERG_NUMBER,DATE,TIME,LATITUDE,LONGITUDE,METHOD,SIZE,SHAPE,SOURCE
     message = "BERG_NUMBER: " + bubble_data.BERG_NUMBER + "<br/> DATE: " + bubble_data.DATE + "<br/> LATITUDE: " + bubble_data.LATITUDE + " <br/> LONGITUDE: " + bubble_data.LONGITUDE + "<br/> METHOD: " + bubble_data.METHOD + "<br/> SIZE: " + bubble_data.SIZE + "<br/> SHAPE: " + bubble_data.SHAPE + "<br/> SOURCE: " + bubble_data.SOURCE;
     return message;
 }
@@ -194,6 +185,24 @@ function plot_bubbles(bubble_data) {
             return tooltip.style("visibility", "hidden");
             });
 }
+
+
+var bubble_data = d3.text("IIP_2014IcebergSeason.csv", function(text) {
+    bubble_data = d3.csv.parse(text);
+    plot_bubbles(bubble_data);
+    });
+
+var zoom = d3.behavior.zoom()
+  .on("zoom",function() {
+      g.attr("transform","translate("+ 
+        d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+      g.selectAll("path")  
+      .attr("d", path.projection(projection)); 
+
+      console.log("hello world");
+      });
+
+svg.call(zoom)
 
     </script>
   </body>

@@ -278,6 +278,20 @@ input[type="twitter-button"]
 	cursor: move;
 }
 
+.zoom_holder {
+  display: block;
+  height: 100px;
+  width: 100px;
+}
+
+.zoom_button {
+  height: 50px;
+  width: 50x;
+  display: block;
+  background-color: #333;
+}
+
+
 svg {overflow: visible}
 path { fill: #ccc; stroke: #F60; }
 circle { stroke-width:0.5px; vector-effect:non-scaling-stroke }
