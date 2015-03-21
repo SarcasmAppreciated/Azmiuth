@@ -29,7 +29,13 @@
 		</div>
 		<div id="main">
 			<div id="map_wrapper">
-				<div id="chart"></div>
+        <div class="zoom_holder">
+          <div class="zoom_holder_vertical">
+            <div class="zoom_button" id="zoom_in">+</div>
+            <div class="zoom_button" id="zoom_out">-</div>
+          </div>
+        </div>
+        <div id="chart"></div>        
 			</div>
 			<div class="content">
 				<% if user_signed_in? %>
