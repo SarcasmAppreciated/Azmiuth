@@ -22,6 +22,6 @@ env :PATH, ENV['PATH']
 set :environment, "development"
 set :output, {:error => "/home/alimv/CPSC310/Azimuth/log/cron_error_log.log", :standard => "/home/alimv/CPSC310/Azimuth/log/cron_log.log"}
 
-every 1.minutes do
+every 15.minutes do
 	rake "user:user_update"
 end
