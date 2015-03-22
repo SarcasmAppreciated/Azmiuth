@@ -20,7 +20,8 @@
 # Learn more: http://github.com/javan/whenever
 env :PATH, ENV['PATH']
 #set :environment, "development"
-set :output, {:error => "/home/alimv/CPSC310/Azimuth/log/cron_error_log.log", :standard => "/home/alimv/CPSC310/Azimuth/log/cron_log.log"}
+#set :output, {:error => "/home/alimv/CPSC310/Azimuth/log/cron_error_log.log", :standard => "/home/alimv/CPSC310/Azimuth/log/cron_log.log"}
+set :output, {:error => "/log/cron_error_log.log", :standard => "/home/alimv/CPSC310/Azimuth/log/cron_log.log"}
 
 every 15.minutes do
 	rake "user:user_update", :environment => 'development' 
