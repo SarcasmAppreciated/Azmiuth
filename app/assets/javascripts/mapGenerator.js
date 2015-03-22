@@ -1,14 +1,4 @@
-console.log("hello world");
 $(document).ready(function(){
-// Pretty circles --------->
-    //
-    color = d3.scale.linear()
-    .domain([12, 30])
-    .range(["red", "green"]);  
-
-    size = d3.scale.linear()
-    .domain([0, 10]);
-    // <----- Pretty circles
 
     var countryFeature;
 
