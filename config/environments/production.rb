@@ -1,4 +1,6 @@
 Rails.application.configure do
+  config.twitter_key = "GOLr7vhTG0zTBSwDrGrCggGes"
+  config.twitter_secret =  "F0gHakPmJvFp8x5zDlNnILN52TAF1AbQmZ2sEYqiT3I0k1m8DF"
   # Settings specified here will take precedence over those in config/application.rb.
  
   # Code is not reloaded between requests.

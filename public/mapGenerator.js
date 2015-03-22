@@ -1,5 +1,12 @@
 $(document).ready(function(){
 
+  // alert(tweets);
+  // if(tweets) {
+  //   for(var i = 0; i < tweets.size; i++) {
+  //     console.log(i);
+  //   }
+  // }
+
     var countryFeature;
 
     var datacentreFeature;
