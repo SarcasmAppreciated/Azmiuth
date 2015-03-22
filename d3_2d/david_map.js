@@ -4,11 +4,11 @@ var bubble_radius = 3;
 var width = 800,
     height = 800;
 
-  var projection = d3.geo.mercator() 
-  .scale(500)
-  .translate([width/1,  height/1])
-.clipAngle(90)
-  .precision(.1);
+  var projection = d3.geo.mercator(); 
+//  .scale(500)
+//  .translate([width/1,  height/1]);
+//.clipAngle(90)
+//  .precision(.1);
 
 var svg = d3.select("#figure").append("svg")
 .attr("width", width)
@@ -78,6 +78,7 @@ var zoom = d3.behavior.zoom()
         d3.event.translate.join(",")+")scale("+d3.event.scale+")");
       g.selectAll("path")  
       .attr("d", path.projection(projection)); 
+      console.log("helloworld");
       });
 
 svg.call(zoom)
