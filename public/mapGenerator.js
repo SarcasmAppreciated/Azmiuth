@@ -35,10 +35,6 @@ $(document).ready(function(){
       .attr('height', 600)
       .attr('id', 'datacentres');
 
-    var bubble_data2 = d3.text("IIP_2014IcebergSeason.csv", function(text) {
-        d3.csv.parse(text);      
-        });
-
     var bubble_radius = 3;
 
     var tooltip = d3.select("body")
