@@ -22,7 +22,7 @@ module Azimuth
     # config.i18n.default_locale = :de
 
 	# Enable the asset pipeline
-	config.assets.enabled = true
+	config.assets.enabled = false
 	config.assets.paths << "#{Rails.root}/app/assets/fonts" 
 		
     # Do not swallow errors in after_commit/after_rollback callbacks.
