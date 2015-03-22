@@ -39,6 +39,8 @@ gem 'omniauth-twitter', :github => 'arunagw/omniauth-twitter'
 
 gem 'twitter', '~> 5.3.1'
 
+gem 'whenever', :require => false
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

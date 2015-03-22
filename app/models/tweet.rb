@@ -10,7 +10,9 @@ end
 
 public
 	def update_all_users_aux
+		puts "Updating Users"
 		User.all.each do |user|
+			puts "Updating User " + user.name
 			update_user_tweets(user, @@number_of_tweets_to_pull)
 		end
 	end 
