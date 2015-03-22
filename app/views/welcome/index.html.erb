@@ -1,4 +1,3 @@
-<%-# tweets = json list. call ["latitude"] and ["longitude"] on object -%>
 <%= javascript_tag do %>
 	icebergs = <%= raw @icebergs.to_json %>
 	tweets = <%= raw @user_tweets.to_json %>
