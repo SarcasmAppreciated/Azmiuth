@@ -6,12 +6,14 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no">
-  <script src="https://code.jquery.com/jquery-2.1.3.js"></script>
-  <script type="text/javascript" src="https://mbostock.github.com/d3/d3.js?2.5.0"></script>
 
 	<%= csrf_meta_tags %>
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application',\
+		 'https://code.jquery.com/jquery-2.1.3.js',\
+		 'https://mbostock.github.com/d3/d3.js?2.5.0',\
+		  'data-turbolinks-track' => true %>
+	<%= yield :head %>
 
 	<link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>	
 

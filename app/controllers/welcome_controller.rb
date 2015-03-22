@@ -7,8 +7,8 @@ class WelcomeController < ApplicationController
     day = Date.today.strftime("%d")
     @icebergs = Iceberg.query_by_month_day(month, day)
     if user_signed_in
-      puts @user_tweets
-      puts '--------------------------------------------'
+      #puts @user_tweets
+      #puts '--------------------------------------------'
       @user_tweets = @user.tweets(:sort){:time_stamp}
     else
       @user_tweets = nil

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'welcome#index'
+
   devise_for :users, :controllers => { :sessions => "sessions" }
   get '/auth/twitter/callback', :to => 'sessions#create'
   get '/auth/failure', :to => 'sessions#failure'
@@ -10,7 +12,4 @@ Rails.application.routes.draw do
   get '/twitter/push_generic_message', :to => 'twitter#push_generic_message'
   resources :preferences
 
-            
-
-  root 'welcome#index'
 end
