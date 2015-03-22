@@ -15,6 +15,7 @@
 		
 	</head>
 	<body>-->
+		<%-# tweets = json list. call ["latitude"] and ["longitude"] on object -%>
 		<%= javascript_tag do %>
 			tweets = <%= raw @user_tweets.to_json %>
 		<% end %>
@@ -89,7 +90,6 @@
 		
 		<script>
 			$(document).ready(function(){	
-			alert(tweets);	
 				var profileIsOpen = true;
 				var tableIsOpen = false;
 				
