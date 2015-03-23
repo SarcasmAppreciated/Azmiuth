@@ -6,6 +6,7 @@
 <div id="header">
 	<div id="logo">A</div>
 	<% if user_signed_in? %>
+  <a href=<% share_my_path %>>Share</a>
 		<a href="/auth/logout"><div class="login_button">Logout</div></a>
 		<div id="avatar"><%= image_tag(current_user.profile_image_url, :width => 48, :height => 48) %></div>
 	<% else %>		
