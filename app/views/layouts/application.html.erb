@@ -8,19 +8,19 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no">
 
 	<%= csrf_meta_tags %>
-	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= stylesheet_link_tag    'application', media: 'all' %>
 	<%= javascript_include_tag 'application',\
-		 'https://mbostock.github.com/d3/d3.js?2.5.0',\
-		  'data-turbolinks-track' => true %>
+		 'https://mbostock.github.com/d3/d3.js?2.5.0'\
+	%>
 
 	<link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>	
-
 	<!--Thank you to Fontfabric for the use of Code Light and Code Bold fonts-->
+
 </head>
+
 <body>
 
-
-<%= yield %>
+	<%= yield %>
 
 </body>
 </html>

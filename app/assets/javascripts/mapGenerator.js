@@ -1,4 +1,5 @@
 $(document).ready(function(){
+// $(".welcome.index").ready(function(){
 
   // alert(tweets);
   // if(tweets) {
