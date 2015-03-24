@@ -30,11 +30,6 @@ $(document).ready(function(){
       .attr('height', 600)
       .attr('id', 'countries');
 
-    var datacentres = svg.append('g')
-      .attr('width', 800)
-      .attr('height', 600)
-      .attr('id', 'datacentres');
-
     var bubble_radius = 3;
 
     var tooltip = d3.select("body")
