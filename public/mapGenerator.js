@@ -75,6 +75,9 @@ $(document).ready(function(){
             o1 = [o0[0] + (m0[0] - m1[0]) / 8, o0[1] + (m1[1] - m0[1]) / 8];    
         projection.origin(o1);    
         circle.origin(o1);    
+        // Want to remove only the icebergs
+        d3.selectAll("circle").remove();
+        plot_bubbles(icebergs);
         refresh();  
       }
     }
