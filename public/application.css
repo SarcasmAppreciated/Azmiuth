@@ -2,7 +2,8 @@ html, body {
 	width: 100%;
 	height: auto;
 	font-family: 'Lato', Arial, Sans Serif;
-	background-color: #BBB;
+//	background-color: #BBB;
+	background-color: #CEECF5;
 }
 
 h1 {
@@ -310,7 +311,8 @@ input[type="twitter-button"]
 }
 
 svg {overflow: visible}
-path { fill: #ccc; stroke: #F60; }
+//path { fill: #ccc; stroke: #F60; }
+path { fill: #2ECCFA; stroke: #070B19; }
 circle { stroke-width:0.5px; vector-effect:non-scaling-stroke }
 circle.f { stroke:#FFFFFF; fill-opacity: 0.8}
 circle.m { stroke:#FFFFFF; fill-opacity: 0.8}

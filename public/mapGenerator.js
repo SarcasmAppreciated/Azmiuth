@@ -5,7 +5,6 @@ $(document).ready(function(){
     var datacentreFeature;
 
     var projection = d3.geo.azimuthal()
-    //.scale(300)
     .scale(600)
     .origin([-71.03,42.37])
     .mode('orthographic')
@@ -71,6 +70,7 @@ $(document).ready(function(){
 
     function mousemove() {  
       if (m0) {    
+        // translate everything to their new coordinates on the globe corresponding to the new origin 
         var m1 = [d3.event.pageX, d3.event.pageY], 
             o1 = [o0[0] + (m0[0] - m1[0]) / 8, o0[1] + (m1[1] - m0[1]) / 8];    
         projection.origin(o1);    
@@ -153,6 +153,20 @@ $(document).ready(function(){
 
     svg.call(zoom)
 
+    function plot_paths(path_data) {
+      // plot circles
+      svg.append("g")
+        .attr("class", "line")
+        .selectAll("line")
+        .data(path_data)
+        .enter().append("line")
+        .attr("transform", function(d) {
+            dat = [d.longitude, d.latitude];
+            return "d3.interpolate(linear).projection(dat)"; 
+        })
+    }
+
+  plot_paths(icebergs);
 
 
 });
