@@ -34,6 +34,7 @@ a {
 	display: block;
 	background-color: #FFF;
 	position: fixed;
+	z-index: 5;
 	top: 0;
 }
 
@@ -48,7 +49,6 @@ a {
 	box-shadow: 0 2px 2px #666;
 	border-radius: 3px;
 	background-color: #FFF;
-	
 	text-align: center;
 	line-height: 48px;
 	font-size: 48px;
@@ -113,7 +113,7 @@ a {
 
 #about_background {
 	height: auto;
-	min-height: 486px;
+	min-height: 400px;
 	width: 100%;
 	display: block;
 }
@@ -133,7 +133,7 @@ a {
 .about_align {
 	margin-top: 25px;
 	margin-bottom: 25px;
-	text-align: left;
+	text-align: justify;
 	background-color: rgba(255,255,255,.5);
 }
 
@@ -168,6 +168,15 @@ a {
 	overflow: hidden;
 }
 
+.slide_span {
+	width: 10px;
+	display: inline-block;
+}
+
+.slide_span.profile {
+	width: 895px;
+}
+
 .x_box {
 	display: inline-block;
 	font-size: 30px;
@@ -187,6 +196,7 @@ a {
 	height: auto;
 	width: 155px;
 	margin-left: 10px;
+	margin-right: 10px;
 	display: block;
 	float: left;
 	text-align: center;
@@ -204,9 +214,10 @@ a {
 
 .text_split {
 	height: 40px;
-	width: 100%;
+	width: 155px;
 	display: block;
 	padding: 5px;
+	margin-top: 20px;
 	background-color: rgba(255,255,255,.25);
 	border-bottom: solid 1px #FFF;
 	text-align: left;
@@ -330,3 +341,33 @@ path { fill: #ccc; stroke: #F60; }
 circle { stroke-width:0.5px; vector-effect:non-scaling-stroke }
 circle.f { stroke:#FFFFFF; fill-opacity: 0.8}
 circle.m { stroke:#FFFFFF; fill-opacity: 0.8}
+
+/* MOBILE */
+@media (max-width: 999px){	
+	#logo {
+		margin-left: 15px;
+	}	
+	.login_button {
+		margin-right: 15px;
+	}
+	.content_realignment, .text_align, .table_box, .profile_horizontal, .text_split {
+		width: auto;
+	}
+	.table_wrapper {
+		width: 100%;
+	}	
+	.text_align  > a > h1 {
+		text-align: center;
+		display: block;
+	}	
+	.profile_horizontal {
+		margin: 0px;
+	}
+	.profile_picture {
+		margin-top: 10px;
+		margin-left: 10px;
+	}
+	.text_split {
+		margin: 10px;
+	}
+}
