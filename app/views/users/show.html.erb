@@ -1,13 +1,3 @@
-<p id="notice"><%= notice %></p>
-
-
-
-<%= javascript_tag do %>
-	icebergs = <%= raw @icebergs.to_json %>
-	tweets = <%= raw @user_tweets.to_json %>
-<% end %>
-
-
 <div id="header">
 	<div id="logo">A</div>
 	<% if user_signed_in? %>
@@ -17,12 +7,13 @@
 		<a href="/auth/twitter"><div class="login_button">Login</div></a>
 	<% end %>
 </div>
+
 <div id="main">
-  
-  <p>Welcome to <%= @public_user.name %>'s public profile on Project Azimuth! 
-</p>
 		<div id="about_background">
 			<div class="overlay_map">
+        <p>  Welcome to <%= @public_user.name %>'s public profile on Project Azimuth! <br/>
+          You can view <%= @public_user.name %>'s progress on the map displayed below and track their vessel across the sea. <br/> For more information, scroll down to see what Azimuth is about. 
+        </p> 
 				<div class="content_realignment about_align">
 					<div class="text_align">
 						<a href="/preferences/">
@@ -37,6 +28,7 @@
 						</p>
 					</div>
 				</div>
+        </div>
 			</div>
 		</div>
 	</div>
