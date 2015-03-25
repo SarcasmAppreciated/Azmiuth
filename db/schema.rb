@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20150308080129) do
 
   create_table "users", force: :cascade do |t|
     t.string  "name",                        default: "", null: false
+    t.string  "user_name",                   default: "", null: false
     t.string  "profile_image_url",           default: "", null: false
     t.integer "user_id",           limit: 8
   end
