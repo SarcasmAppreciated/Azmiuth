@@ -27,29 +27,31 @@
 		<% if user_signed_in? %>
 			<div class="content_realignment">
 				<div class="table_wrapper profile">
-					<div class="table_expand profile"><h2 style="display: inline">Profile </h2><span class="slide_span profile" style="display: inline-block; width: 895px"></span><div class="x_box profile">+</div></div>
+					<div class="table_expand profile"><h2 style="display: inline">Profile </h2><span class="slide_span profile"></span><div class="x_box profile">+</div></div>
 					<div class="table_box profile">
 						<div class="profile_horizontal sensitive profile">
 							<div class="profile_picture sensitive profile" style="display: inline-block"><%= image_tag(current_user.profile_image_url, :width => 128, :height => 128) %></div>
 						</div>
 						<div class="profile_horizontal sensitive profile">
-							<div class="text_split profile sensitive" style="margin-top: 20px">
+							<div class="text_split profile sensitive">
 								<p class="text_split_title sensitive profile" style="color: #999">User:</p>
-								<h3 class="sensitive profile"><%=current_user.name=%></h3> <!--  Evenutally switch to link to Twitter Profile -->	
+								<!--<a href="https://twitter.com/<%=current_user.name=%>" target="_new">--><h3 class="sensitive profile"><%=current_user.name=%></h3><!--</a> Need USERNAME--> 
 							</div>
-							<div class="text_split profile sensitive" style="margin-top: 20px">
+							<div class="text_split profile sensitive">
 								<p class="text_split_title sensitive profile" style="color: #999">Share to Twitter:</p>
 								<a href="<% share_my_path %>"><h3 class="sensitive profile">Share!</h3></a>
 							</div>
-							<div class="text_split profile sensitive" style="margin-top: 20px">
+							<div class="text_split profile sensitive">
 								<p class="text_split_title sensitive profile" style="color: #999">Quit:</p>
-								<a href="/auth/destroy"><h3 class="sensitive profile" style="font-size: 16px">Deactivate Account</h3></a> <!--  Evenutally switch to link to Twitter Profile -->	
+								<a href="/auth/destroy"><h3 class="sensitive profile" style="font-size: 16px">Deactivate Account</h3></a>
 							</div>
 						</div>
+						<!-- <div class="profile_horizontal sensitive profile">
+						</div> TWEETS HERE -->
 					</div>
 				</div>
 				<div class="table_wrapper">
-					<div class="table_expand"><h2 style="display: inline">Coordinate Table </h2><span class="slide_span table" style="display: inline-block; width: 10px"></span><div class="x_box table">+</div></div>
+					<div class="table_expand"><h2 style="display: inline">Coordinate Table </h2><span class="slide_span table"></span><div class="x_box table">+</div></div>
 					<div class="table_box table">
 						<ul class="coordinate_table sensitive table"></ul>
 					</div>

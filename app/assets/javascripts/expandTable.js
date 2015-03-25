@@ -1,14 +1,24 @@
 $(document).ready(function(){		
 	var profileIsOpen = true;
 	var tableIsOpen = false;
+	var pageWidth = $(document).width();
 	
+	if(pageWidth < 1200)
+		$(".slide_span.profile").css('width','10');		
+
 	$(".x_box.profile").click(function() {
-		check_Open(profileIsOpen, 895, ".profile");
+		if(pageWidth > 1050)
+			check_Open(profileIsOpen, 895, ".profile");
+		else
+			check_Open(profileIsOpen, 10, ".profile");
 		profileIsOpen = !profileIsOpen;
 	});
 	
 	$(".x_box.table").click(function() {
-		check_Open(tableIsOpen, 775, ".table");
+		if(pageWidth > 1050)
+			check_Open(tableIsOpen, 775, ".table");
+		else
+			check_Open(tableIsOpen, 10, ".table");
 		tableIsOpen = !tableIsOpen;
 	});
 	
