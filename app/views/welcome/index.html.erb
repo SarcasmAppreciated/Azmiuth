@@ -7,24 +7,21 @@
 <div id="header">
 	<div id="logo">A</div>
 	<% if user_signed_in? %>
-  <a href=<% share_my_path %>>Share</a>
 		<a href="/auth/logout"><div class="login_button">Logout</div></a>
 		<div id="avatar"><%= image_tag(current_user.profile_image_url, :width => 48, :height => 48) %></div>
 	<% else %>		
 		<a href="/auth/twitter"><div class="login_button">Login</div></a>
 	<% end %>
-  <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-hashtags="AzimuthSailing">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </div>
 <div id="main">
 	<div id="map_wrapper">
-<div class="zoom_holder">
-  <div class="zoom_holder_vertical">
-    <div class="zoom_button" id="zoom_in">+</div>
-    <div class="zoom_button" id="zoom_out">-</div>
-  </div>
-</div>
-<div id="chart"></div>        
+		<div class="zoom_holder">
+			<div class="zoom_holder_vertical">
+				<div class="zoom_button" id="zoom_in">+</div>
+				<div class="zoom_button" id="zoom_out">-</div>
+			</div>
+		</div>
+		<div id="chart"></div>        
 	</div>
 	<div class="content">
 		<% if user_signed_in? %>
@@ -39,6 +36,10 @@
 							<div class="text_split profile sensitive" style="margin-top: 20px">
 								<p class="text_split_title sensitive profile" style="color: #999">User:</p>
 								<h3 class="sensitive profile"><%=current_user.name=%></h3> <!--  Evenutally switch to link to Twitter Profile -->	
+							</div>
+							<div class="text_split profile sensitive" style="margin-top: 20px">
+								<p class="text_split_title sensitive profile" style="color: #999">Share to Twitter:</p>
+								<a href="<% share_my_path %>"><h3 class="sensitive profile">Share!</h3></a>
 							</div>
 							<div class="text_split profile sensitive" style="margin-top: 20px">
 								<p class="text_split_title sensitive profile" style="color: #999">Quit:</p>
@@ -76,4 +77,6 @@
 	</div>
 </div>
 <div id="footer">
+	<a href="https://twitter.com/share" class="twitter_public" data-size="large" data-hashtags="AzimuthSailing"></a>
 </div>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
