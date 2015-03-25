@@ -34,6 +34,7 @@ class WelcomeController < ApplicationController
     else 
       raise "User not signed in"
     end 
+    redirect_to :root
   end
   
 end
