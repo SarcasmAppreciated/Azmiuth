@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   devise_for :users, :controllers => { :sessions => "sessions" }
-
+  get '/share_my_path', :to => 'welcome#share_my_path'
   get '/auth/twitter/callback', :to => 'sessions#create'
   get '/auth/failure', :to => 'sessions#failure'
   get '/auth/logout', :to => 'sessions#logout'
