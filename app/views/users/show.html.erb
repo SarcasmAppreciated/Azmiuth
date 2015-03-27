@@ -1,38 +1,17 @@
-<div id="header">
-	<div id="logo">A</div>
-	<% if user_signed_in? %>
-		<a href="/auth/logout"><div class="login_button">Logout</div></a>
-		<div id="avatar"><%= image_tag(current_user.profile_image_url, :width => 48, :height => 48) %></div>
-	<% else %>		
-		<a href="/auth/twitter"><div class="login_button">Login</div></a>
+<%= content_for :load_tweets do %>
+	<%= javascript_tag do %>
+		tweets = <%= raw @public_user.tweets.to_json %>
 	<% end %>
-</div>
+<% end %>
 
-<div id="main">
-		<div id="about_background">
-			<div class="overlay_map">
-        <p>  Welcome to <%= @public_user.name %>'s public profile on Project Azimuth! <br/>
-          You can view <%= @public_user.name %>'s progress on the map displayed below and track their vessel across the sea. <br/> For more information, scroll down to see what Azimuth is about. 
-        </p> 
-				<div class="content_realignment about_align">
-					<div class="text_align">
-						<a href="/preferences/">
-							<h1>PROJECT</h1>
-							<h1 style="font-family: 'code_boldregular'">AZIMUTH</h1>
-						</a>
-						<h2>About Azimuth</h2>
-						<p style="margin-top: 10px">	Azimuth or Project Azimuth is an application created to aid the UBC Sailbot team in its endeavour to cross the Atlantic ocean in an unmanned aquatic vehicle. As an extension, the application can be applied to actual marine vessels.<br/><br/>
-							While not providing the software to control the vehicle, the purpose of this project is to track and navigate the Sailbot or any other vessel on its journey across the ocean. Using Twitter and utilizing its geo-location services, the software will track tweets made by the Sailbot/vessel and the location where they were made.<br/><br/>
-							Azimuth's niche feature is its tracking of icebergs that pose a threat to unmanned vehicles (and manned ones as well). Using the Canadian Ice Service database, icebergs are tracked in order to provide navigation solutions.<br/><br/>
-							Initially, Azimuth will start as a web application which will feature a map of progress made by the Sailbot/vessel and known iceberg locations. Data is restricted by login information tied to Twitter profiles.
-						</p>
-					</div>
-				</div>
-        </div>
-			</div>
+<%= content_for :user_page do %>
+<div class="overlay_map">
+	<div class="content_realignment about_align">
+		<div class="text_align">
+		    <p>  Welcome to <%= @public_user.name %>'s public profile on Project Azimuth! <br/>
+		      You can view <%= @public_user.name %>'s progress on the map displayed below and track their vessel across the sea. <br/> For more information, scroll down to see what Azimuth is about. 
+		    </p> 
 		</div>
 	</div>
-<div id="footer">
-	<a href="https://twitter.com/share" class="twitter_public" data-size="large" data-hashtags="AzimuthSailing"></a>
 </div>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<% end %>

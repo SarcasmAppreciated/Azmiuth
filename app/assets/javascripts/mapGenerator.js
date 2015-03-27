@@ -46,7 +46,7 @@ var tooltip = d3.select("body")
   .attr("class", "hoverinfo")
   .style("visibility", "hidden");
 
-d3.json('world-countries.json', function(collection) {  
+d3.json(world_countries_path, function(collection) {  
 
   countryFeature = countries.selectAll('path')
   .data(collection.features)
@@ -205,8 +205,8 @@ var links = [
 {
   type: "LineString",
     coordinates: [
-      [ tweets[0].longitude, icebergs[0].latitude ],
-      [ tweets[1].longitude, icebergs[1].latitude ]
+      [ tweets[0].longitude, tweets[0].latitude ],
+      [ tweets[1].longitude, tweets[1].latitude ]
     ]
 }
 ];
@@ -216,8 +216,8 @@ for(var i=0, len=tweets.length-1; i<len; i++){
   links.push({
     type: "LineString",
     coordinates: [
-    [ tweets[i].longitude, icebergs[i].latitude ],
-    [ tweets[i+1].longitude, icebergs[i+1].latitude ]
+    [ tweets[i].longitude, tweets[i].latitude ],
+    [ tweets[i+1].longitude, tweets[i+1].latitude ]
     ]
   });
 }

@@ -1,84 +1,45 @@
-<%= javascript_tag do %>
-	icebergs = <%= raw @icebergs.to_json %>
-	tweets = <%= raw @user_tweets.to_json %>
+<!--Load all user data on index -->
+<%= content_for :load_tweets do %>
+	<%= javascript_tag do %>
+		tweets = <%= raw @user_tweets.to_json %>
+	<% end %>
 <% end %>
 
+<% content_for :user_table do %>
 
-<div id="header">
-	<div id="logo">A</div>
 	<% if user_signed_in? %>
-		<a href="/auth/logout"><div class="login_button">Logout</div></a>
-		<div id="avatar"><%= image_tag(current_user.profile_image_url, :width => 48, :height => 48) %></div>
-	<% else %>		
-		<a href="/auth/twitter"><div class="login_button">Login</div></a>
+		<div class="content_realignment">
+			<div class="table_wrapper profile">
+				<div class="table_expand profile"><h2 style="display: inline">Profile </h2><span class="slide_span profile"></span><div class="x_box profile">+</div></div>
+				<div class="table_box profile">
+					<div class="profile_horizontal sensitive profile">
+						<div class="profile_picture sensitive profile" style="display: inline-block"><%= image_tag(current_user.profile_image_url, :width => 128, :height => 128) %></div>
+					</div>
+					<div class="profile_horizontal sensitive profile">
+						<div class="text_split profile sensitive">
+							<p class="text_split_title sensitive profile" style="color: #999">User:</p>
+							<a href="https://twitter.com/<%=current_user.user_name=%>" target="_new"><h3 class="sensitive profile"><%=current_user.name=%></h3></a>
+						</div>
+						<div class="text_split profile sensitive">
+							<p class="text_split_title sensitive profile" style="color: #999">Share to Twitter:</p>
+							<a href="/share_my_path"><h3 class="sensitive profile">Share!</h3></a>
+						</div>
+						<div class="text_split profile sensitive">
+							<p class="text_split_title sensitive profile" style="color: #999">Quit:</p>
+							<a href="/auth/destroy"><h3 class="sensitive profile" style="font-size: 16px">Deactivate Account</h3></a>
+						</div>
+					</div>
+					<!-- <div class="profile_horizontal sensitive profile">
+					</div> TWEETS HERE -->
+				</div>
+			</div>
+			<div class="table_wrapper">
+				<div class="table_expand"><h2 style="display: inline">Coordinate Table </h2><span class="slide_span table"></span><div class="x_box table">+</div></div>
+				<div class="table_box table">
+					<ul class="coordinate_table sensitive table"></ul>
+				</div>
+			</div>
+		</div>
 	<% end %>
-</div>
-<div id="main">
-	<div id="map_wrapper">
-		<div class="zoom_holder">
-			<div class="zoom_holder_vertical">
-				<div class="zoom_button" id="zoom_in">+</div>
-				<div class="zoom_button" id="zoom_out">-</div>
-			</div>
-		</div>
-		<div id="chart"></div>        
-	</div>
-	<div class="content">
-		<% if user_signed_in? %>
-			<div class="content_realignment">
-				<div class="table_wrapper profile">
-					<div class="table_expand profile"><h2 style="display: inline">Profile </h2><span class="slide_span profile"></span><div class="x_box profile">+</div></div>
-					<div class="table_box profile">
-						<div class="profile_horizontal sensitive profile">
-							<div class="profile_picture sensitive profile" style="display: inline-block"><%= image_tag(current_user.profile_image_url, :width => 128, :height => 128) %></div>
-						</div>
-						<div class="profile_horizontal sensitive profile">
-							<div class="text_split profile sensitive">
-								<p class="text_split_title sensitive profile" style="color: #999">User:</p>
-								<a href="https://twitter.com/<%=current_user.user_name=%>" target="_new"><h3 class="sensitive profile"><%=current_user.name=%></h3></a>
-							</div>
-							<div class="text_split profile sensitive">
-								<p class="text_split_title sensitive profile" style="color: #999">Share to Twitter:</p>
-								<a href="/share_my_path"><h3 class="sensitive profile">Share!</h3></a>
-							</div>
-							<div class="text_split profile sensitive">
-								<p class="text_split_title sensitive profile" style="color: #999">Quit:</p>
-								<a href="/auth/destroy"><h3 class="sensitive profile" style="font-size: 16px">Deactivate Account</h3></a>
-							</div>
-						</div>
-						<!-- <div class="profile_horizontal sensitive profile">
-						</div> TWEETS HERE -->
-					</div>
-				</div>
-				<div class="table_wrapper">
-					<div class="table_expand"><h2 style="display: inline">Coordinate Table </h2><span class="slide_span table"></span><div class="x_box table">+</div></div>
-					<div class="table_box table">
-						<ul class="coordinate_table sensitive table"></ul>
-					</div>
-				</div>
-			</div>
-		<% end %>			
-		<div id="about_background">
-			<div class="overlay_map">
-				<div class="content_realignment about_align">
-					<div class="text_align">
-						<a href="/preferences/">
-							<h1>PROJECT</h1>
-							<h1 style="font-family: 'code_boldregular'">AZIMUTH</h1>
-						</a>
-						<h2>About Azimuth</h2>
-						<p style="margin-top: 10px">	Azimuth or Project Azimuth is an application created to aid the UBC Sailbot team in its endeavour to cross the Atlantic ocean in an unmanned aquatic vehicle. As an extension, the application can be applied to actual marine vessels.<br/><br/>
-							While not providing the software to control the vehicle, the purpose of this project is to track and navigate the Sailbot or any other vessel on its journey across the ocean. Using Twitter and utilizing its geo-location services, the software will track tweets made by the Sailbot/vessel and the location where they were made.<br/><br/>
-							Azimuth's niche feature is its tracking of icebergs that pose a threat to unmanned vehicles (and manned ones as well). Using the Canadian Ice Service database, icebergs are tracked in order to provide navigation solutions.<br/><br/>
-							Initially, Azimuth will start as a web application which will feature a map of progress made by the Sailbot/vessel and known iceberg locations. Data is restricted by login information tied to Twitter profiles.
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div id="footer">
-	<a href="https://twitter.com/share" class="twitter_public" data-size="large" data-hashtags="AzimuthSailing"></a>
-</div>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<% end %>

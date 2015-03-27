@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/twitter/update_current_user', :to => 'twitter#update_current_user'
   get '/twitter /', :to => 'twitter#index'
   get '/twitter/push_generic_message', :to => 'twitter#push_generic_message'
+  #get '/users/:id', :to => 'users#show'
 
   resources :preferences
   resources :users              
