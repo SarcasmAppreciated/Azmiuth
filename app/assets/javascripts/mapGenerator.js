@@ -1,12 +1,4 @@
 $(document).ready(function(){
-// $(".welcome.index").ready(function(){
-
-  // alert(tweets);
-  // if(tweets) {
-  //   for(var i = 0; i < tweets.size; i++) {
-  //     console.log(i);
-  //   }
-  // }
 
   var countryFeature;
 
@@ -86,6 +78,9 @@ function mousemove() {
     // Want to remove only the icebergs
     d3.selectAll("circle").remove();
     plot_bubbles(icebergs);
+    // Want to remove the old path
+    d3.selectAll(".arc").remove();
+    plot_paths();
     refresh();  
   }
 }
@@ -164,28 +159,10 @@ function zoom(){
 
 svg.call(zoom);
 
-/*
-   function plot_paths(path_data) {
-// plot circles
-svg.append("g")
-.attr("class", "line")
-.selectAll("line")
-.data(path_data)
-.enter().append("line")
-.attr("transform", function(d) {
-dat = [d.longitude, d.latitude];
-return "d3.interpolate(linear).projection(dat)"; 
-})
-}
-
-plot_paths(icebergs);
-*/
-
-
 var arcGroup = g.append('g');
 
 var lineTransition = function lineTransition(path) {
-    path.transition()
+  path.transition()
     .duration(5500)
     .attrTween("stroke-dasharray", tweenDash)
     .each("end", function(d,i) { 
@@ -199,15 +176,13 @@ var tweenDash = function tweenDash() {
   return function(t) { return interpolate(t); };
 };
 
-console.log(tweets);
-
 var links = [
 {
   type: "LineString",
     coordinates: [
       [ tweets[0].longitude, tweets[0].latitude ],
       [ tweets[1].longitude, tweets[1].latitude ]
-    ]
+      ]
 }
 ];
 
@@ -222,9 +197,7 @@ for(var i=0, len=tweets.length-1; i<len; i++){
   });
 }
 
-var pathArcs = arcGroup.selectAll(".arc")
-.data(links);
-
+var pathArcs = arcGroup.selectAll(".arc").data(links);
 
 pathArcs.enter()
   .append("path").attr({
@@ -233,16 +206,34 @@ pathArcs.enter()
     fill: 'none',
   });
 
+//!! In order to redraw this we need to remove and call on every mouse click.
 pathArcs.attr({
   d: path
-})
-.style({
+}).style({
   stroke: '#0000ff',
-  'stroke-width': '2px'
+  'stroke-width': '1px'
 })
 .call(lineTransition); 
 pathArcs.exit().remove();
 
 
+function plot_paths() {
+  var pathArcs = arcGroup.selectAll(".arc").data(links);
+  pathArcs.enter()
+    .append("path").attr({
+      'class': 'arc'
+    }).style({ 
+      fill: 'none',
+    });
+  //!! In order to redraw this we need to remove and call on every mouse click.
+  pathArcs.attr({
+    d: path
+  }).style({
+    stroke: '#0000ff',
+    'stroke-width': '1px'
+  })
+  .call(lineTransition); 
+  pathArcs.exit().remove();
+}
 
 });
