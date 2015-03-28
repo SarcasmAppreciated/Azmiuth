@@ -12,7 +12,6 @@ $(document).ready(function(){
 
 var circle = d3.geo.greatCircle().origin(projection.origin());
 
-// TODO fix d3.geo.azimuthal to be consistent with scale
 var scale = {  orthographic: 380,  stereographic: 380,  gnomonic: 380,  
   equidistant: 380 / Math.PI * 2,  equalarea: 380 / Math.SQRT2};
 
@@ -44,8 +43,6 @@ d3.json(world_countries_path, function(collection) {
   .data(collection.features)
   .enter().append('svg:path')
   .attr('d', clip);
-
-//countryFeature.append("svg:title").text(function(d) { return d.properties.name; }).attr('text-anchor', 'middle');
 
 });
 
@@ -142,6 +139,8 @@ function plot_bubbles(bubble_data) {
   });
 }
 
+// ZOOM FUNCTIONALITY
+
 var scale_size = 485;
 var scale_factor = 1;
 
@@ -183,6 +182,7 @@ var zoom = d3.behavior.zoom()
 
 svg.call(zoom);
 
+// PATH FUNCTIONALITY
 
 var arcGroup = svg.append('g');
 
@@ -202,16 +202,6 @@ var tweenDash = function tweenDash() {
 };
 
 if (tweets.length != 0) {
-
-  var links = [
-  {
-    type: "LineString",
-    coordinates: [
-      [ tweets[0].longitude, tweets[0].latitude ],
-      [ tweets[1].longitude, tweets[1].latitude ]
-      ]
-  }
-  ];
 
   links = [];
   for(var i=0, len=tweets.length-1; i<len; i++){
