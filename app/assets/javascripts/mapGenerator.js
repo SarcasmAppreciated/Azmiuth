@@ -79,8 +79,8 @@ function mousemove() {
     d3.selectAll("circle").remove();
     plot_bubbles(icebergs);
     // Want to remove the old path
-    //d3.selectAll(".arc").remove();
-    //plot_paths();
+    d3.selectAll(".arc").remove();
+    plot_paths();
     refresh();  
   }
 }
@@ -147,9 +147,15 @@ var scale_factor = 1;
 
 function zoom_Helper(scale_input){
   scale_size = scale_input;
+  // Remove old elements
+  d3.selectAll(".arc").remove();
   d3.selectAll("circle").remove();
+  // Resize the projection
   projection.scale(scale_size);
+  // Plot the elements back on
   plot_bubbles(icebergs);
+  plot_paths();
+  // Generate the map again.
   refresh();
 }
 
@@ -182,7 +188,7 @@ var arcGroup = svg.append('g');
 
 var lineTransition = function lineTransition(path) {
   path.transition()
-    .duration(500)
+    .duration(0)
     .attrTween("stroke-dasharray", tweenDash)
     .each("end", function(d,i) { 
     });
