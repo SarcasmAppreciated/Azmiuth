@@ -146,16 +146,29 @@ var scale_size = 485;
 var scale_factor = 1;
 
 function zoom_Helper(scale_input){
-        scale_size = scale_input;
-        projection.scale(scale_size);
-        d3.selectAll("circle").remove();
-        plot_bubbles(icebergs);
-        refresh();
+  scale_size = scale_input;
+  d3.selectAll("circle").remove();
+  projection.scale(scale_size);
+  plot_bubbles(icebergs);
+  console.log("After zoom is...");
+  console.log(scale_size);
+  refresh();
 }
 
-var zoom = d3.behavior.zoom()
-    .on("zoom",function() {
+/*
+ *  TODO
+ *
+ *  Make the zooming cleaner, hence have a duration lock so that a zoom event can only be caught with a rest between
+ *  The zoom values flip back and forth between certain values, prevent this.
+ *  Make zoom and pan completely disjoint, only one can occur at a time
+ *
+ */
 
+var zoom = d3.behavior.zoom()
+  .on("zoom",function() {
+
+    console.log("Before zoom is...");
+    console.log(scale_size);
     if (d3.event.scale < 1){
       scale_factor = 0.75;
     }
@@ -163,17 +176,19 @@ var zoom = d3.behavior.zoom()
       scale_factor = 1.25;
     }
 
-    if(scale_size >= 485 && scale_size <=1500){
+    if(scale_size >= 485 && scale_size <= 2500){
       scale_size = scale_size * scale_factor;
       zoom_Helper(scale_size);
       if (scale_size <= 485) {
-        zoom_Helper(485);
+        console.log("entering less");
+        scale_size = 485;
       }
-      if (scale_size >= 1500) {
-        zoom_Helper(1500);
+      if (scale_size >= 2500) {
+        console.log("entering more");
+        scale_size = 2500;
       }
     }
-});
+  });
 
 svg.call(zoom);
 
@@ -197,72 +212,70 @@ var tweenDash = function tweenDash() {
 
 /*
  * Why do they keep up showing up as undefined yet return an array length of 0 yet that value is not comparable?
-var check = tweets.length
-if (check !== undefined) {
-  console.log(tweets)
-  console.log(tweets.length)
-*/
+ var check = tweets.length
+ if (check !== undefined) {
+ console.log(tweets)
+ console.log(tweets.length)
+ */
 
-/*
-var links = [
-{
-  type: "LineString",
-    coordinates: [
-      [ tweets[0].longitude, tweets[0].latitude ],
-      [ tweets[1].longitude, tweets[1].latitude ]
-      ]
-}
-];
+   var links = [
+   {
+   type: "LineString",
+   coordinates: [
+   [ tweets[0].longitude, tweets[0].latitude ],
+   [ tweets[1].longitude, tweets[1].latitude ]
+   ]
+   }
+   ];
 
-links = [];
-for(var i=0, len=tweets.length-1; i<len; i++){
-  links.push({
-    type: "LineString",
-    coordinates: [
-    [ tweets[i].longitude, tweets[i].latitude ],
-    [ tweets[i+1].longitude, tweets[i+1].latitude ]
-    ]
-  });
-}
+   links = [];
+   for(var i=0, len=tweets.length-1; i<len; i++){
+   links.push({
+   type: "LineString",
+   coordinates: [
+   [ tweets[i].longitude, tweets[i].latitude ],
+   [ tweets[i+1].longitude, tweets[i+1].latitude ]
+   ]
+   });
+   }
 
-var pathArcs = arcGroup.selectAll(".arc").data(links);
+   var pathArcs = arcGroup.selectAll(".arc").data(links);
 
-pathArcs.enter()
-  .append("path").attr({
-    'class': 'arc'
-  }).style({ 
-    fill: 'none',
-  });
+   pathArcs.enter()
+   .append("path").attr({
+   'class': 'arc'
+   }).style({ 
+   fill: 'none',
+   });
 
 //!! In order to redraw this we need to remove and call on every mouse click.
 pathArcs.attr({
-  d: path
+d: path
 }).style({
-  stroke: '#0000ff',
-  'stroke-width': '1px'
+stroke: '#0000ff',
+'stroke-width': '1px'
 })
 .call(lineTransition); 
 pathArcs.exit().remove();
 
 function plot_paths() {
-  var pathArcs = arcGroup.selectAll(".arc").data(links);
-  pathArcs.enter()
-    .append("path").attr({
-      'class': 'arc'
-    }).style({ 
-      fill: 'none',
-    });
-  //!! In order to redraw this we need to remove and call on every mouse click.
-  pathArcs.attr({
-    d: path
-  }).style({
-    stroke: '#0000ff',
-    'stroke-width': '1px'
-  })
-  .call(lineTransition); 
-  pathArcs.exit().remove();
+var pathArcs = arcGroup.selectAll(".arc").data(links);
+pathArcs.enter()
+.append("path").attr({
+'class': 'arc'
+}).style({ 
+fill: 'none',
+});
+//!! In order to redraw this we need to remove and call on every mouse click.
+pathArcs.attr({
+d: path
+}).style({
+stroke: '#0000ff',
+'stroke-width': '1px'
+})
+.call(lineTransition); 
+pathArcs.exit().remove();
 }
 
 plot_paths();
-*/
 });
