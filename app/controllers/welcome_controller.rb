@@ -11,7 +11,7 @@ class WelcomeController < ApplicationController
     if user_signed_in
       @user_tweets = @user.tweets(:sort){:time_stamp}
     else
-      @user_tweets = nil
+      @user_tweets = Tweet.none
     end
   end
 
