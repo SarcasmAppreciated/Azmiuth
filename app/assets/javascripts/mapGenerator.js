@@ -201,19 +201,29 @@ var tweenDash = function tweenDash() {
   return function(t) { return interpolate(t); };
 };
 
-if (tweets.length != 0) {
+/*
+if (tweets == null) {
+  console.log("Its null Jim");
+}
+*/
 
-  links = [];
-  for(var i=0, len=tweets.length-1; i<len; i++){
-    links.push({
-      type: "LineString",
-      coordinates: [
-      [ tweets[i].longitude, tweets[i].latitude ],
-      [ tweets[i+1].longitude, tweets[i+1].latitude ]
-      ]
-    });
+if (tweets != null){
+  if (tweets.length != 0) {
+
+    links = [];
+    for(var i=0, len=tweets.length-1; i<len; i++){
+      links.push({
+        type: "LineString",
+        coordinates: [
+        [ tweets[i].longitude, tweets[i].latitude ],
+        [ tweets[i+1].longitude, tweets[i+1].latitude ]
+        ]
+      });
+    }
+
+  } else {
+    var links = [];
   }
-
 } else {
   var links = [];
 }
@@ -250,7 +260,7 @@ function plot_paths() {
   pathArcs.attr({
     d: path
   }).style({
-    stroke: '#0000ff',
+    stroke: '#000066',
     'stroke-width': '1px'
   })
   .call(lineTransition); 
