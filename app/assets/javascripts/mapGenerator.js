@@ -1,12 +1,4 @@
 $(document).ready(function(){
-// $(".welcome.index").ready(function(){
-
-  // alert(tweets);
-  // if(tweets) {
-  //   for(var i = 0; i < tweets.size; i++) {
-  //     console.log(i);
-  //   }
-  // }
 
   var countryFeature;
 
@@ -20,7 +12,6 @@ $(document).ready(function(){
 
 var circle = d3.geo.greatCircle().origin(projection.origin());
 
-// TODO fix d3.geo.azimuthal to be consistent with scale
 var scale = {  orthographic: 380,  stereographic: 380,  gnomonic: 380,  
   equidistant: 380 / Math.PI * 2,  equalarea: 380 / Math.SQRT2};
 
@@ -46,14 +37,12 @@ var tooltip = d3.select("body")
   .attr("class", "hoverinfo")
   .style("visibility", "hidden");
 
-d3.json('world-countries.json', function(collection) {  
+d3.json(world_countries_path, function(collection) {  
 
   countryFeature = countries.selectAll('path')
   .data(collection.features)
   .enter().append('svg:path')
   .attr('d', clip);
-
-countryFeature.append("svg:title").text(function(d) { return d.properties.name; }).attr('text-anchor', 'middle');
 
 });
 
@@ -86,6 +75,9 @@ function mousemove() {
     // Want to remove only the icebergs
     d3.selectAll("circle").remove();
     plot_bubbles(icebergs);
+    // Want to remove the old path
+    d3.selectAll(".arc").remove();
+    plot_paths();
     refresh();  
   }
 }
@@ -115,7 +107,6 @@ function ballSize (datum) {
 function assignClass (datum) {
   return (datum.kgCO2e > 0.2) ? "f" : "m"; 
 }
-
 
 function create_tooltip_message(bubble_data) {
   message = "berg_number: " + bubble_data.berg_number + "<br/> date: " + bubble_data.date + "<br/> latitude: " + bubble_data.latitude + " <br/> longitude: " + bubble_data.longitude + "<br/> size: " + bubble_data.size + "<br/> shape: " + bubble_data.shape;
@@ -148,45 +139,56 @@ function plot_bubbles(bubble_data) {
   });
 }
 
-var g = svg.append("g");
+// ZOOM FUNCTIONALITY
 
-function zoom(){
-  d3.behavior.zoom()
-    .on("zoom",function() {
-      g.attr("transform","translate("+ 
-        d3.event.translate.join(",")+")scale("+d3.event.scale+")");
-      //g.selectAll("path")  
-      g.selectAll("circle")  
-      .attr("d", path.projection(projection)); 
-    console.log("helloworld");
-    });
+var scale_size = 485;
+var scale_factor = 1;
+
+function zoom_Helper(scale_input){
+  scale_size = scale_input;
+  // Remove old elements
+  d3.selectAll(".arc").remove();
+  d3.selectAll("circle").remove();
+  // Resize the projection
+  projection.scale(scale_size);
+  // Plot the elements back on
+  plot_bubbles(icebergs);
+  plot_paths();
+  // Generate the map again.
+  refresh();
 }
+
+var zoom = d3.behavior.zoom()
+  .on("zoom",function() {
+
+    if (d3.event.scale < 1){
+      scale_factor = 0.75;
+    }
+    if (d3.event.scale > 1){
+      scale_factor = 1.25;
+    }
+
+    if(scale_size >= 485 && scale_size <= 2500){
+      scale_size = scale_size * scale_factor;
+      zoom_Helper(scale_size);
+      if (scale_size <= 485) {
+        scale_size = 485;
+      }
+      if (scale_size >= 2500) {
+        scale_size = 2500;
+      }
+    }
+  });
 
 svg.call(zoom);
 
-/*
-   function plot_paths(path_data) {
-// plot circles
-svg.append("g")
-.attr("class", "line")
-.selectAll("line")
-.data(path_data)
-.enter().append("line")
-.attr("transform", function(d) {
-dat = [d.longitude, d.latitude];
-return "d3.interpolate(linear).projection(dat)"; 
-})
-}
+// PATH FUNCTIONALITY
 
-plot_paths(icebergs);
-*/
-
-
-var arcGroup = g.append('g');
+var arcGroup = svg.append('g');
 
 var lineTransition = function lineTransition(path) {
-    path.transition()
-    .duration(5500)
+  path.transition()
+    .duration(0)
     .attrTween("stroke-dasharray", tweenDash)
     .each("end", function(d,i) { 
     });
@@ -199,32 +201,24 @@ var tweenDash = function tweenDash() {
   return function(t) { return interpolate(t); };
 };
 
-console.log(tweets);
+if (tweets.length != 0) {
 
-var links = [
-{
-  type: "LineString",
-    coordinates: [
-      [ tweets[0].longitude, icebergs[0].latitude ],
-      [ tweets[1].longitude, icebergs[1].latitude ]
-    ]
-}
-];
+  links = [];
+  for(var i=0, len=tweets.length-1; i<len; i++){
+    links.push({
+      type: "LineString",
+      coordinates: [
+      [ tweets[i].longitude, tweets[i].latitude ],
+      [ tweets[i+1].longitude, tweets[i+1].latitude ]
+      ]
+    });
+  }
 
-links = [];
-for(var i=0, len=tweets.length-1; i<len; i++){
-  links.push({
-    type: "LineString",
-    coordinates: [
-    [ tweets[i].longitude, icebergs[i].latitude ],
-    [ tweets[i+1].longitude, icebergs[i+1].latitude ]
-    ]
-  });
+} else {
+  var links = [];
 }
 
-var pathArcs = arcGroup.selectAll(".arc")
-.data(links);
-
+var pathArcs = arcGroup.selectAll(".arc").data(links);
 
 pathArcs.enter()
   .append("path").attr({
@@ -233,16 +227,36 @@ pathArcs.enter()
     fill: 'none',
   });
 
+//!! In order to redraw this we need to remove and call on every mouse click.
 pathArcs.attr({
   d: path
-})
-.style({
+}).style({
   stroke: '#0000ff',
-  'stroke-width': '2px'
+  'stroke-width': '1px'
 })
 .call(lineTransition); 
 pathArcs.exit().remove();
 
+function plot_paths() {
 
+  var pathArcs = arcGroup.selectAll(".arc").data(links);
+  pathArcs.enter()
+    .append("path").attr({
+      'class': 'arc'
+    }).style({ 
+      fill: 'none',
+    });
+  //!! In order to redraw this we need to remove and call on every mouse click.
+  pathArcs.attr({
+    d: path
+  }).style({
+    stroke: '#0000ff',
+    'stroke-width': '1px'
+  })
+  .call(lineTransition); 
+  pathArcs.exit().remove();
+}
+
+plot_paths();
 
 });

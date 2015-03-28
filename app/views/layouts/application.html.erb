@@ -19,8 +19,60 @@
 </head>
 
 <body>
+	<!--Load all icebergs for the day on each page.-->
+	<%= javascript_tag do %>
+		icebergs = <%= raw @icebergs.to_json %>;
+		world_countries_path = "<%= asset_path "world-countries.json" %>";
+	<% end %>
+	<%= yield :load_tweets %>
 
-	<%= yield %>
+
+<div id="header">
+	<div id="logo">A</div>
+	<% if user_signed_in? %>
+		<a href="/auth/logout"><div class="login_button">Logout</div></a>
+		<div id="avatar"><%= image_tag(current_user.profile_image_url, :width => 48, :height => 48) %></div>
+	<% else %>		
+		<a href="/auth/twitter"><div class="login_button">Login</div></a>
+	<% end %>
+</div>
+
+<div id="main">
+	<div id="map_wrapper">
+		<div class="zoom_holder">
+			<div class="zoom_holder_vertical">
+				<div class="zoom_button" id="zoom_in">+</div>
+				<div class="zoom_button" id="zoom_out">-</div>
+			</div>
+		</div>
+		<div id="chart"></div>        
+	</div>
+	<div class="content">
+		<%= yield :user_table %>
+		<%= yield :user_page %>
+		<div id="about_background">
+			<div class="overlay_map">
+				<div class="content_realignment about_align">
+					<div class="text_align">
+						<a href="/preferences/">
+							<h1>PROJECT</h1>
+							<h1 style="font-family: 'code_boldregular'">AZIMUTH</h1>
+						</a>
+						<h2>About Azimuth</h2>
+						<p style="margin-top: 10px">	Azimuth or Project Azimuth is an application created to aid the UBC Sailbot team in its endeavour to cross the Atlantic ocean in an unmanned aquatic vehicle. As an extension, the application can be applied to actual marine vessels.<br/><br/>
+							While not providing the software to control the vehicle, the purpose of this project is to track and navigate the Sailbot or any other vessel on its journey across the ocean. Using Twitter and utilizing its geo-location services, the software will track tweets made by the Sailbot/vessel and the location where they were made.<br/><br/>
+							Azimuth's niche feature is its tracking of icebergs that pose a threat to unmanned vehicles (and manned ones as well). Using the Canadian Ice Service database, icebergs are tracked in order to provide navigation solutions.<br/><br/>
+							Initially, Azimuth will start as a web application which will feature a map of progress made by the Sailbot/vessel and known iceberg locations. Data is restricted by login information tied to Twitter profiles.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="footer">
+	<a href="https://twitter.com/share" class="twitter_public" data-size="large" data-hashtags="AzimuthSailing"></a>
+</div>
 
 </body>
 </html>
