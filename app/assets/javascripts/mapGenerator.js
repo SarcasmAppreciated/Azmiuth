@@ -45,7 +45,7 @@ d3.json(world_countries_path, function(collection) {
   .enter().append('svg:path')
   .attr('d', clip);
 
-countryFeature.append("svg:title").text(function(d) { return d.properties.name; }).attr('text-anchor', 'middle');
+//countryFeature.append("svg:title").text(function(d) { return d.properties.name; }).attr('text-anchor', 'middle');
 
 });
 
@@ -79,8 +79,8 @@ function mousemove() {
     d3.selectAll("circle").remove();
     plot_bubbles(icebergs);
     // Want to remove the old path
-    d3.selectAll(".arc").remove();
-    plot_paths();
+    //d3.selectAll(".arc").remove();
+    //plot_paths();
     refresh();  
   }
 }
@@ -110,7 +110,6 @@ function ballSize (datum) {
 function assignClass (datum) {
   return (datum.kgCO2e > 0.2) ? "f" : "m"; 
 }
-
 
 function create_tooltip_message(bubble_data) {
   message = "berg_number: " + bubble_data.berg_number + "<br/> date: " + bubble_data.date + "<br/> latitude: " + bubble_data.latitude + " <br/> longitude: " + bubble_data.longitude + "<br/> size: " + bubble_data.size + "<br/> shape: " + bubble_data.shape;
@@ -143,27 +142,47 @@ function plot_bubbles(bubble_data) {
   });
 }
 
-var g = svg.append("g");
+var scale_size = 485;
+var scale_factor = 1;
 
-function zoom(){
-  d3.behavior.zoom()
-    .on("zoom",function() {
-      g.attr("transform","translate("+ 
-        d3.event.translate.join(",")+")scale("+d3.event.scale+")");
-      //g.selectAll("path")  
-      g.selectAll("circle")  
-      .attr("d", path.projection(projection)); 
-    console.log("helloworld");
-    });
+function zoom_Helper(scale_input){
+        scale_size = scale_input;
+        projection.scale(scale_size);
+        d3.selectAll("circle").remove();
+        plot_bubbles(icebergs);
+        refresh();
 }
+
+var zoom = d3.behavior.zoom()
+    .on("zoom",function() {
+
+    if (d3.event.scale < 1){
+      scale_factor = 0.75;
+    }
+    if (d3.event.scale > 1){
+      scale_factor = 1.25;
+    }
+
+    if(scale_size >= 485 && scale_size <=1500){
+      scale_size = scale_size * scale_factor;
+      zoom_Helper(scale_size);
+      if (scale_size <= 485) {
+        zoom_Helper(485);
+      }
+      if (scale_size >= 1500) {
+        zoom_Helper(1500);
+      }
+    }
+});
 
 svg.call(zoom);
 
-var arcGroup = g.append('g');
+
+var arcGroup = svg.append('g');
 
 var lineTransition = function lineTransition(path) {
   path.transition()
-    .duration(5500)
+    .duration(500)
     .attrTween("stroke-dasharray", tweenDash)
     .each("end", function(d,i) { 
     });
@@ -176,6 +195,15 @@ var tweenDash = function tweenDash() {
   return function(t) { return interpolate(t); };
 };
 
+/*
+ * Why do they keep up showing up as undefined yet return an array length of 0 yet that value is not comparable?
+var check = tweets.length
+if (check !== undefined) {
+  console.log(tweets)
+  console.log(tweets.length)
+*/
+
+/*
 var links = [
 {
   type: "LineString",
@@ -216,7 +244,6 @@ pathArcs.attr({
 .call(lineTransition); 
 pathArcs.exit().remove();
 
-
 function plot_paths() {
   var pathArcs = arcGroup.selectAll(".arc").data(links);
   pathArcs.enter()
@@ -236,4 +263,6 @@ function plot_paths() {
   pathArcs.exit().remove();
 }
 
+plot_paths();
+*/
 });
