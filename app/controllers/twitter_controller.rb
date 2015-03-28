@@ -1,7 +1,7 @@
 class TwitterController < ApplicationController
     require "twitter"
 
-    @number_of_tweets_to_pull = 20
+    @number_of_tweets_to_pull = 40
 
     def update_current_user
         update_current_user_aux
@@ -29,10 +29,11 @@ class TwitterController < ApplicationController
         Tweet.pushTweet(user, message)
         #############################
         #Code only used to seed database 
-        #input_lat = 55.836421
-        #input_long = -48.881295
+        # 
+        #input_lat =  59.896510
+        #input_long = -43.424513
         #Tweet.push_tweet_with_geo(user, message, input_lat, input_long)
-        #Tweet.update_current_user_aux
+        #Tweet.update_user_tweets(user,@number_of_tweets_to_pull)
         #############################
         redirect_to '/twitter/'
     end
