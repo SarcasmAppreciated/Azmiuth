@@ -22,7 +22,7 @@
 	<!--Load all icebergs for the day on each page.-->
 	<%= javascript_tag do %>
 		icebergs = <%= raw @icebergs.to_json %>;
-		world_countries_path = "<%= asset_path "world-countries.json" %>";
+		world_countries_path = "<%= asset_path "custom.geo.json" %>";
 	<% end %>
 	<%= yield :load_tweets %>
 
