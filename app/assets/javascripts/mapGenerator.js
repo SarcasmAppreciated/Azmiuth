@@ -1,10 +1,8 @@
 $(document).ready(function(){
 
-  var countryFeature;
+var countryFeature;
 
-  var datacentreFeature;
-
-  var projection = d3.geo.azimuthal()
+var projection = d3.geo.azimuthal()
   .scale(485)
   .origin([-71.03,42.37])
   .mode('orthographic')
@@ -15,7 +13,8 @@ var circle = d3.geo.greatCircle().origin(projection.origin());
 var scale = {  orthographic: 380,  stereographic: 380,  gnomonic: 380,  
   equidistant: 380 / Math.PI * 2,  equalarea: 380 / Math.SQRT2};
 
-var path = d3.geo.path().projection(projection);
+var path = d3.geo.path()
+  .projection(projection);
 
 var svg = d3.select("#chart")
   .append('svg:svg')
@@ -25,7 +24,7 @@ var svg = d3.select("#chart")
 var countries = svg.append('g')
   .attr('id', 'countries');
 
-var bubble_radius = 2;
+var bubble_radius = 1;
 
 var tooltip = d3.select("body")
   .append("div")
@@ -40,17 +39,19 @@ d3.json(world_countries_path, function(collection) {
   .data(collection.features)
   .enter().append('svg:path')
   .attr('d', clip);
-
 });
 
-d3.select(window).on('mousemove', mousemove)
-.on('mouseup', mouseup);
+d3.select(window)
+  .on('mousemove', mousemove)
+  .on('mouseup', mouseup);
 
-d3.select('select').on('change', 
-    function() {  
-      projection.mode(this.value).scale(scale[this.value]);  
+d3.select('select')
+  .on('change', function() {  
+      projection
+      .mode(this.value)
+      .scale(scale[this.value]);  
       refresh(750);
-    });
+  });
 
 plot_bubbles(icebergs);
 
@@ -72,9 +73,11 @@ function mousemove() {
     // Want to remove only the icebergs
     d3.selectAll("circle").remove();
     plot_bubbles(icebergs);
+    plot_tweets(tweets);
     // Want to remove the old path
     d3.selectAll(".arc").remove();
     plot_paths();
+    // Now refresh the entire map so that the updates take effect
     refresh();  
   }
 }
@@ -97,21 +100,19 @@ function clip(d) {
   return path(circle.clip(d));
 }
 
-function ballSize (datum) {
-  return (datum.kgCO2e > 1) ? 10 : (10 * Math.exp((1 - datum.kgCO2e), 2));
-}  
-
-function assignClass (datum) {
-  return (datum.kgCO2e > 0.2) ? "f" : "m"; 
+function create_tooltip_message(bubble_data) {
+  message = "ICEBERG <br/> Iceberg Number: " + bubble_data.berg_number + "<br/> Date: " + bubble_data.date + "<br/> Latitude: " + bubble_data.latitude + " <br/> Longitude: " + bubble_data.longitude + "<br/> Size: " + bubble_data.size + "<br/> Shape: " + bubble_data.shape;
+  return message;
 }
 
-function create_tooltip_message(bubble_data) {
-  message = "berg_number: " + bubble_data.berg_number + "<br/> date: " + bubble_data.date + "<br/> latitude: " + bubble_data.latitude + " <br/> longitude: " + bubble_data.longitude + "<br/> size: " + bubble_data.size + "<br/> shape: " + bubble_data.shape;
+
+function create_tooltip_message_tweets(tweet_data) {
+  message = "TWEET <br/> Latitude: " + tweet_data.latitude + " <br/> Longitude: " + tweet_data.longitude + "<br/> Timestamp: " + tweet_data.time_stamp + "<br/> Tweet: " + tweet_data.tweet_text;
+
   return message;
 }
 
 function plot_bubbles(bubble_data) {
-  // plot circles
   svg.append("g")
     .attr("class", "bubble")
     .selectAll("circle")
@@ -150,10 +151,11 @@ function zoom_Helper(scale_input){
   projection.scale(scale_size);
   // Plot the elements back on
   plot_bubbles(icebergs);
+  plot_tweets(tweets);
   plot_paths();
   // Generate the map again.
   refresh();
-  
+
   adjustFooter();
 }
 
@@ -163,33 +165,35 @@ var initHeight = $(document).height() - 75;
 var initialHeight = Math.max(initHeight, aboutHeight);
 
 // Please let me keep this here; possible start for future - Ben
-/*$("#footer").css("top", initialHeight);
-if(currentHeight > initialHeight) {
-	$("#footer").fadeOut("fast", function(){
-		currentHeight = $(document).height() - 75;
-		$("#footer").css("top",initialHeight).animate({top: currentHeight }).fadeIn("slow");		
-	});
-}*/
-	
+/*
+ $("#footer").css("top", initialHeight);
+  if(currentHeight > initialHeight) {
+  $("#footer").fadeOut("fast", function(){
+  currentHeight = $(document).height() - 75;
+  $("#footer").css("top",initialHeight).animate({top: currentHeight }).fadeIn("slow");		
+  });
+  }
+*/
+
 function adjustFooter() {
-	var currentHeight = $(document).height() - 75;
-	if(currentHeight > initialHeight) {
-		$("#footer").fadeOut("slow");
-	} else {
-		$("#footer").fadeIn("slow");
-	}
+  var currentHeight = $(document).height() - 75;
+  if(currentHeight > initialHeight) {
+    $("#footer").fadeOut("slow");
+  } else {
+    $("#footer").fadeIn("slow");
+  }
 }
-	
+
 d3.selectAll('#zoom_in').on('click', function(){
-    d3.event.preventDefault();
-	scale_size += 50;
-	zoom_Helper(scale_size);
+  d3.event.preventDefault();
+  scale_size += 50;
+  zoom_Helper(scale_size);
 });
 
 d3.selectAll('#zoom_out').on('click', function(){
-    d3.event.preventDefault();
-	scale_size -= 50;
-	zoom_Helper(scale_size);
+  d3.event.preventDefault();
+  scale_size -= 50;
+  zoom_Helper(scale_size);
 });
 
 
@@ -220,33 +224,16 @@ svg.call(zoom);
 
 // PATH FUNCTIONALITY
 
-var arcGroup = svg.append('g');
-
 var lineTransition = function lineTransition(path) {
   path.transition()
     .duration(0)
-    .attrTween("stroke-dasharray", tweenDash)
-    .each("end", function(d,i) { 
-    });
+    .attrTween("stroke-dasharray", ("3,3"));
 };
 
-var tweenDash = function tweenDash() {
-  var len = this.getTotalLength(),
-      interpolate = d3.interpolateString("0," + len, len + "," + len);
-
-  return function(t) { return interpolate(t); };
-};
-
-/*
-if (tweets == null) {
-  console.log("Its null Jim");
-}
-*/
-
+var links = [];
 if (tweets != null){
   if (tweets.length != 0) {
 
-    links = [];
     for(var i=0, len=tweets.length-1; i<len; i++){
       links.push({
         type: "LineString",
@@ -256,53 +243,63 @@ if (tweets != null){
         ]
       });
     }
-
-  } else {
-    var links = [];
-  }
-} else {
-  var links = [];
+  } 
 }
 
+var arcGroup = svg.append('g');
 var pathArcs = arcGroup.selectAll(".arc").data(links);
-
-pathArcs.enter()
-  .append("path").attr({
-    'class': 'arc'
-  }).style({ 
-    fill: 'none',
-  });
-
-//!! In order to redraw this we need to remove and call on every mouse click.
-pathArcs.attr({
-  d: path
-}).style({
-  stroke: '#0000ff',
-  'stroke-width': '1px'
-})
-.call(lineTransition); 
-pathArcs.exit().remove();
 
 function plot_paths() {
 
-  var pathArcs = arcGroup.selectAll(".arc").data(links);
   pathArcs.enter()
     .append("path").attr({
       'class': 'arc'
     }).style({ 
       fill: 'none',
     });
-  //!! In order to redraw this we need to remove and call on every mouse click.
   pathArcs.attr({
     d: path
   }).style({
-    stroke: '#ffb739',
-    'stroke-width': '3px'
+    stroke: '#0066CC',
+    'stroke-width': '2px'
   })
   .call(lineTransition); 
   pathArcs.exit().remove();
 }
 
 plot_paths();
+
+function plot_tweets(tweet_data) {
+  svg.append("g")
+    .attr("class", "bubble")
+    .selectAll("circle")
+    .data(tweet_data)
+    .enter().append("circle")
+    .attr("transform", function(d) {
+      tweet_dat = [d.longitude, d.latitude];
+      return "translate(" + projection(tweet_dat) + ")"; 
+    })
+  .attr("r", function() {
+    return bubble_radius;
+  })
+  .on("mouseover", function(d){
+    tooltip.html(create_tooltip_message_tweets(d));
+    return tooltip.style("visibility", "visible");
+  })
+  .on("mousemove", function(){
+    return tooltip.style("top",(d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+  })
+  .on("mouseout", function(){
+    return tooltip.style("visibility", "hidden");
+  });
+}
+
+plot_tweets(tweets)
+
+
+
+
+
+
 
 });
