@@ -295,11 +295,4 @@ function plot_tweets(tweet_data) {
 }
 
 plot_tweets(tweets)
-
-
-
-
-
-
-
 });
