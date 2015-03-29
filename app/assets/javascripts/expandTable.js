@@ -52,5 +52,8 @@ $(document).ready(function(){
 		for(var i = 0; i < icebergs.length; i++) {
 			$(".coordinate_table").append("<li class='coordinate sensitive table'>" + icebergs[i].latitude +  ", " + icebergs[i].longitude +  "</li>");
 		}
-	}				
+	}
+	
+	
+	
 });

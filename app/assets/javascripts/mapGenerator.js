@@ -19,13 +19,10 @@ var path = d3.geo.path().projection(projection);
 
 var svg = d3.select("#chart")
   .append('svg:svg')
-  .attr('width', 800)    
-  .attr('height', 600)
+  .attr("viewBox", "0 0 800 600")
   .on('mousedown', mousedown);
 
 var countries = svg.append('g')
-  .attr('width', 800)
-  .attr('height', 600)
   .attr('id', 'countries');
 
 var bubble_radius = 2;
@@ -156,8 +153,47 @@ function zoom_Helper(scale_input){
   plot_paths();
   // Generate the map again.
   refresh();
+  
+  adjustFooter();
 }
 
+
+var aboutHeight = $(".content").offset().top + $(".content").height() + 75;
+var initHeight = $(document).height() - 75;
+var initialHeight = Math.max(initHeight, aboutHeight);
+
+// Please let me keep this here; possible start for future - Ben
+/*$("#footer").css("top", initialHeight);
+if(currentHeight > initialHeight) {
+	$("#footer").fadeOut("fast", function(){
+		currentHeight = $(document).height() - 75;
+		$("#footer").css("top",initialHeight).animate({top: currentHeight }).fadeIn("slow");		
+	});
+}*/
+	
+function adjustFooter() {
+	var currentHeight = $(document).height() - 75;
+	if(currentHeight > initialHeight) {
+		$("#footer").fadeOut("slow");
+	} else {
+		$("#footer").fadeIn("slow");
+	}
+}
+	
+d3.selectAll('#zoom_in').on('click', function(){
+    d3.event.preventDefault();
+	scale_size += 50;
+	zoom_Helper(scale_size);
+});
+
+d3.selectAll('#zoom_out').on('click', function(){
+    d3.event.preventDefault();
+	scale_size -= 50;
+	zoom_Helper(scale_size);
+});
+
+
+// ZOOM
 var zoom = d3.behavior.zoom()
   .on("zoom",function() {
 
