@@ -12,7 +12,6 @@ $(document).ready(function(){
 
 var circle = d3.geo.greatCircle().origin(projection.origin());
 
-// TODO fix d3.geo.azimuthal to be consistent with scale
 var scale = {  orthographic: 380,  stereographic: 380,  gnomonic: 380,  
   equidistant: 380 / Math.PI * 2,  equalarea: 380 / Math.SQRT2};
 
@@ -41,8 +40,6 @@ d3.json(world_countries_path, function(collection) {
   .data(collection.features)
   .enter().append('svg:path')
   .attr('d', clip);
-
-//countryFeature.append("svg:title").text(function(d) { return d.properties.name; }).attr('text-anchor', 'middle');
 
 });
 
@@ -76,8 +73,8 @@ function mousemove() {
     d3.selectAll("circle").remove();
     plot_bubbles(icebergs);
     // Want to remove the old path
-    //d3.selectAll(".arc").remove();
-    //plot_paths();
+    d3.selectAll(".arc").remove();
+    plot_paths();
     refresh();  
   }
 }
@@ -139,33 +136,40 @@ function plot_bubbles(bubble_data) {
   });
 }
 
+// ZOOM FUNCTIONALITY
+
 var scale_size = 485;
 var scale_factor = 1;
 
 function zoom_Helper(scale_input){
   scale_size = scale_input;
+  // Remove old elements
+  d3.selectAll(".arc").remove();
   d3.selectAll("circle").remove();
+  // Resize the projection
   projection.scale(scale_size);
+  // Plot the elements back on
   plot_bubbles(icebergs);
-  console.log("After zoom is...");
-  console.log(scale_size);
+  plot_paths();
+  // Generate the map again.
   refresh();
   
   adjustFooter();
 }
 
+
 var aboutHeight = $(".content").offset().top + $(".content").height() + 75;
 var initHeight = $(document).height() - 75;
 var initialHeight = Math.max(initHeight, aboutHeight);
-/*
-$("#footer").css("top", initialHeight);
+
+// Please let me keep this here; possible start for future - Ben
+/*$("#footer").css("top", initialHeight);
 if(currentHeight > initialHeight) {
 	$("#footer").fadeOut("fast", function(){
 		currentHeight = $(document).height() - 75;
 		$("#footer").css("top",initialHeight).animate({top: currentHeight }).fadeIn("slow");		
 	});
-}
-*/
+}*/
 	
 function adjustFooter() {
 	var currentHeight = $(document).height() - 75;
@@ -188,20 +192,11 @@ d3.selectAll('#zoom_out').on('click', function(){
 	zoom_Helper(scale_size);
 });
 
-/*
- *  TODO
- *
- *  Make the zooming cleaner, hence have a duration lock so that a zoom event can only be caught with a rest between
- *  The zoom values flip back and forth between certain values, prevent this.
- *  Make zoom and pan completely disjoint, only one can occur at a time
- *
- */
 
+// ZOOM
 var zoom = d3.behavior.zoom()
   .on("zoom",function() {
 
-    console.log("Before zoom is...");
-    console.log(scale_size);
     if (d3.event.scale < 1){
       scale_factor = 0.75;
     }
@@ -213,11 +208,9 @@ var zoom = d3.behavior.zoom()
       scale_size = scale_size * scale_factor;
       zoom_Helper(scale_size);
       if (scale_size <= 485) {
-        console.log("entering less");
         scale_size = 485;
       }
       if (scale_size >= 2500) {
-        console.log("entering more");
         scale_size = 2500;
       }
     }
@@ -225,12 +218,13 @@ var zoom = d3.behavior.zoom()
 
 svg.call(zoom);
 
+// PATH FUNCTIONALITY
 
 var arcGroup = svg.append('g');
 
 var lineTransition = function lineTransition(path) {
   path.transition()
-    .duration(500)
+    .duration(0)
     .attrTween("stroke-dasharray", tweenDash)
     .each("end", function(d,i) { 
     });
@@ -244,71 +238,71 @@ var tweenDash = function tweenDash() {
 };
 
 /*
- * Why do they keep up showing up as undefined yet return an array length of 0 yet that value is not comparable?
- var check = tweets.length
- if (check !== undefined) {
- console.log(tweets)
- console.log(tweets.length)
- */
+if (tweets == null) {
+  console.log("Its null Jim");
+}
+*/
 
-   var links = [
-   {
-   type: "LineString",
-   coordinates: [
-   [ tweets[0].longitude, tweets[0].latitude ],
-   [ tweets[1].longitude, tweets[1].latitude ]
-   ]
-   }
-   ];
+if (tweets != null){
+  if (tweets.length != 0) {
 
-   links = [];
-   for(var i=0, len=tweets.length-1; i<len; i++){
-   links.push({
-   type: "LineString",
-   coordinates: [
-   [ tweets[i].longitude, tweets[i].latitude ],
-   [ tweets[i+1].longitude, tweets[i+1].latitude ]
-   ]
-   });
-   }
+    links = [];
+    for(var i=0, len=tweets.length-1; i<len; i++){
+      links.push({
+        type: "LineString",
+        coordinates: [
+        [ tweets[i].longitude, tweets[i].latitude ],
+        [ tweets[i+1].longitude, tweets[i+1].latitude ]
+        ]
+      });
+    }
 
-   var pathArcs = arcGroup.selectAll(".arc").data(links);
+  } else {
+    var links = [];
+  }
+} else {
+  var links = [];
+}
 
-   pathArcs.enter()
-   .append("path").attr({
-   'class': 'arc'
-   }).style({ 
-   fill: 'none',
-   });
+var pathArcs = arcGroup.selectAll(".arc").data(links);
+
+pathArcs.enter()
+  .append("path").attr({
+    'class': 'arc'
+  }).style({ 
+    fill: 'none',
+  });
 
 //!! In order to redraw this we need to remove and call on every mouse click.
 pathArcs.attr({
-d: path
+  d: path
 }).style({
-stroke: '#0000ff',
-'stroke-width': '1px'
+  stroke: '#0000ff',
+  'stroke-width': '1px'
 })
 .call(lineTransition); 
 pathArcs.exit().remove();
 
 function plot_paths() {
-var pathArcs = arcGroup.selectAll(".arc").data(links);
-pathArcs.enter()
-.append("path").attr({
-'class': 'arc'
-}).style({ 
-fill: 'none',
-});
-//!! In order to redraw this we need to remove and call on every mouse click.
-pathArcs.attr({
-d: path
-}).style({
-stroke: '#0000ff',
-'stroke-width': '1px'
-})
-.call(lineTransition); 
-pathArcs.exit().remove();
+
+  var pathArcs = arcGroup.selectAll(".arc").data(links);
+  pathArcs.enter()
+    .append("path").attr({
+      'class': 'arc'
+    }).style({ 
+      fill: 'none',
+    });
+  //!! In order to redraw this we need to remove and call on every mouse click.
+  pathArcs.attr({
+    d: path
+  }).style({
+    stroke: '#000066',
+    'stroke-width': '1px'
+  })
+  .call(lineTransition); 
+  pathArcs.exit().remove();
 }
 
 plot_paths();
+
 });
