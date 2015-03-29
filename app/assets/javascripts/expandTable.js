@@ -54,6 +54,13 @@ $(document).ready(function(){
 		}
 	}
 	
-	
-	
+	append_Tweets();
+	function append_Tweets() {
+		if ((tweets != null) &&(tweets.length != 0)){
+			for(var i = 0; i < tweets.length; i++)
+			{
+			$(".profile_horizontal.tweets").append("<div class='tweet_box'><p class='tweet_time_loc'>" + tweets[i].time_stamp + " \[" + tweets[i].latitude + ", " + tweets[i].longitude + "\]</p><p class='tweet_text'>" + tweets[i].tweet_text + "</p></div>");			
+			}
+		}
+	}
 });

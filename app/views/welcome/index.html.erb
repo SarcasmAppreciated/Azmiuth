@@ -13,7 +13,7 @@
 				<div class="table_expand profile"><h2 style="display: inline">Profile </h2><span class="slide_span profile"></span><div class="x_box profile">+</div></div>
 				<div class="table_box profile">
 					<div class="profile_horizontal sensitive profile">
-						<div class="profile_picture sensitive profile" style="display: inline-block"><%= image_tag(current_user.profile_image_url, :width => 128, :height => 128) %></div>
+						<div class="profile_picture sensitive profile"><%= image_tag(current_user.profile_image_url, :width => 128, :height => 128) %></div>
 					</div>
 					<div class="profile_horizontal sensitive profile">
 						<div class="text_split profile sensitive">
@@ -29,8 +29,9 @@
 							<a href="/auth/destroy"><h3 class="sensitive profile" style="font-size: 16px">Deactivate Account</h3></a>
 						</div>
 					</div>
-					<!-- <div class="profile_horizontal sensitive profile">
-					</div> TWEETS HERE -->
+					<div class="profile_horizontal tweets sensitive profile">
+						<p class="text_split_title sensitive profile">Geo-tagged Tweets:</p>
+					</div>
 				</div>
 			</div>
 			<div class="table_wrapper">
