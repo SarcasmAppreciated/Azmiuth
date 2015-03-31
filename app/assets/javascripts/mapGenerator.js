@@ -24,7 +24,7 @@ var svg = d3.select("#chart")
 var countries = svg.append('g')
   .attr('id', 'countries');
 
-var bubble_radius = 1;
+var bubble_radius = 2;
 
 var tooltip = d3.select("body")
   .append("div")
@@ -70,11 +70,11 @@ function mousemove() {
         o1 = [o0[0] + (m0[0] - m1[0]) / 8, o0[1] + (m1[1] - m0[1]) / 8];    
     projection.origin(o1);    
     circle.origin(o1);    
-    // Want to remove only the icebergs
+    // Want to remove the old icebergs and tweets and then replot them
     d3.selectAll("circle").remove();
     plot_bubbles(icebergs);
     plot_tweets(tweets);
-    // Want to remove the old path
+    // Want to remove the old path and then replot it
     d3.selectAll(".arc").remove();
     plot_paths();
     // Now refresh the entire map so that the updates take effect
