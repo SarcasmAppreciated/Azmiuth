@@ -3,7 +3,7 @@ $(document).ready(function(){
 var countryFeature;
 
 var projection = d3.geo.azimuthal()
-  .scale(485)
+  .scale(385)
   .origin([-71.03,42.37])
   .mode('orthographic')
   .translate([400, 400]);
@@ -226,9 +226,10 @@ svg.call(zoom);
 
 var lineTransition = function lineTransition(path) {
   path.transition()
-    .duration(0)
-    .attrTween("stroke-dasharray", ("3,3"));
+    .duration(0);
+    //.attrTween("stroke-dasharray", ("3,3"));
 };
+
 
 var links = [];
 if (tweets != null){
