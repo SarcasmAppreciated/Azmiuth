@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
   def redirect_to_azimuthsail
     domain_to_redirect_to = 'http://www.azimuthsail.com/'
-    domain_to_catch = 'http://sheltered-stream-7018.herokuapp.com/'
+    domain_to_catch = 'sheltered-stream-7018.herokuapp.com'
     should_redirect = request.host.include? domain_to_catch
     new_url = "#{request.protocol}#{domain_to_redirect_to}#{request.fullpath if request.fullpath != '/'}"
     redirect_to new_url, status: :moved_permanently if should_redirect
