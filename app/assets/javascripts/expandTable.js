@@ -23,7 +23,7 @@ $(document).ready(function(){
 	});
 	
 	$(document).scroll(function(){
-		if($(document).scrollTop() > 45) {
+		if($(document).scrollTop() > 25) {
 			$("#zoom_holder").appendTo("#header").addClass("zoom_header");
 		}
 		else

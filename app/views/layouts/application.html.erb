@@ -28,7 +28,7 @@
 
 
 <div id="header">
-	<div id="logo"></div>
+	<a href="/"><div id="logo"></div></a>
 	<% if user_signed_in? %>
 		<a href="/auth/logout"><div class="login_button">Logout</div></a>
 		<div id="avatar"><%= image_tag(current_user.profile_image_url, :width => 48, :height => 48) %></div>
