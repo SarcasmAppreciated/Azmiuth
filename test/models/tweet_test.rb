@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class TweetTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+	test "get client" do
+		assert true
+	end
 end
