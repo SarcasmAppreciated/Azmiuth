@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_azimuthsail
-    domain_to_redirect_to = 'http://www.azimuthsail.com/'
+    domain_to_redirect_to = 'www.azimuthsail.com'
     domain_to_catch = 'sheltered-stream-7018.herokuapp.com'
     should_redirect = request.host.include? domain_to_catch
     new_url = "#{request.protocol}#{domain_to_redirect_to}#{request.fullpath if request.fullpath != '/'}"
