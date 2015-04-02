@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :load_icebergs
+  before_filter :redirect_to_azimuthsail if Rails.env.production?
 
   def current_user
   	return User.find_by_user_id(session[:user_id])
@@ -15,6 +16,16 @@ class ApplicationController < ActionController::Base
     day = Date.today.strftime("%d")
     @icebergs = Iceberg.query_by_month_day(month, day)
   end
+
+  def redirect_to_azimuthsail
+    domain_to_redirect_to = 'http://www.azimuthsail.com/'
+    domain_to_catch = 'http://sheltered-stream-7018.herokuapp.com/'
+    should_redirect = request.host.include? domain_to_catch
+    new_url = "#{request.protocol}#{domain_to_redirect_to}#{request.fullpath if request.fullpath != '/'}"
+    redirect_to new_url, status: :moved_permanently if should_redirect
+  end
+
+
 
    
 end
