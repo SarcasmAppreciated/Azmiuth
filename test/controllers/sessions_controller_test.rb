@@ -28,6 +28,8 @@ class SessionsControllerTest < ActionController::TestCase
   end
 
   test "should get logout" do
+    MYSTRING = "ABC"
+    @request.env["omniauth.auth"] = { "info" => {"name" => MYSTRING, "nickname" => MYSTRING,  "image"=> MYSTRING }, "uid" => 42, "credentials"=>{"secret"=>MYSTRING, "token"=>MYSTRING}}
   	get :create
   	assert_no_difference 'User.count' do
   		get :logout
