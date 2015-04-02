@@ -28,7 +28,7 @@
 
 
 <div id="header">
-	<div id="logo">A</div>
+	<div id="logo"></div>
 	<% if user_signed_in? %>
 		<a href="/auth/logout"><div class="login_button">Logout</div></a>
 		<div id="avatar"><%= image_tag(current_user.profile_image_url, :width => 48, :height => 48) %></div>
@@ -39,8 +39,8 @@
 
 <div id="main">
 	<div id="map_wrapper">
-		<div class="zoom_holder">
-			<div class="zoom_holder_vertical">
+		<div id="zoom_holder">
+			<div id="zoom_holder_vertical">
 				<div class="zoom_button" id="zoom_in">+</div>
 				<div class="zoom_button" id="zoom_out">-</div>
 			</div>

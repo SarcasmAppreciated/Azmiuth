@@ -22,6 +22,14 @@ $(document).ready(function(){
 		tableIsOpen = !tableIsOpen;
 	});
 	
+	$(document).scroll(function(){
+		if($(document).scrollTop() > 45) {
+			$("#zoom_holder").appendTo("#header").addClass("zoom_header");
+		}
+		else
+			$("#zoom_holder").prependTo("#map_wrapper").removeClass("zoom_header");
+	});
+	
 	append_Table();
 	
 	function check_Open(isOpen, x, y){

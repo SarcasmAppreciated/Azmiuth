@@ -261,7 +261,7 @@ function plot_paths() {
   pathArcs.attr({
     d: path
   }).style({
-    stroke: '#0066CC',
+    stroke: '#ffb739',
     'stroke-width': '2px'
   })
   .call(lineTransition); 
