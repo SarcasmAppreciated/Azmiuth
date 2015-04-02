@@ -23,6 +23,8 @@
 	<%= javascript_tag do %>
 		icebergs = <%= raw @icebergs.to_json %>;
 		world_countries_path = "<%= asset_path "custom.geo.json" %>";
+		boat_image_path = "<%= asset_path "boat.png" %>";
+		iceberg_image_path = "<%= asset_path "iceberg.png" %>";
 	<% end %>
 	<%= yield :load_tweets %>
 
