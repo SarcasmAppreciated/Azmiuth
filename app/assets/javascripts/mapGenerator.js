@@ -71,8 +71,7 @@ function mousemove() {
     projection.origin(o1);    
     circle.origin(o1);    
     // Want to remove the old icebergs and tweets and then replot them
-    d3.selectAll(".iceberg").remove();
-	d3.selectAll(".boat").remove();
+    d3.selectAll(".icons").remove();
     plot_bubbles(icebergs);
     plot_tweets(tweets);
     // Want to remove the old path and then replot it
@@ -121,6 +120,7 @@ function plot_bubbles(bubble_data) {
     // .enter().append("circle")
 	.enter().append("image")
 	.attr("xlink:href", iceberg_image_path)
+	.attr("class", "icons")
 	.attr("x", -6.5)
 	.attr("y", -6.5)
 	.attr("height", 13)
@@ -153,8 +153,7 @@ function zoom_Helper(scale_input){
   scale_size = scale_input;
   // Remove old elements
   d3.selectAll(".arc").remove();
-  d3.selectAll(".iceberg").remove();
-  d3.selectAll(".boat").remove();
+  d3.selectAll(".icons").remove();
   // Resize the projection
   projection.scale(scale_size);
   // Plot the elements back on
@@ -286,7 +285,7 @@ function plot_tweets(tweet_data) {
 	// .enter().append("circle")
     .enter().append("image")
 	.attr("xlink:href", boat_image_path)
-	.attr("class", "boat")
+	.attr("class", "icons")
 	.attr("x", -7.5)
 	.attr("y", -7.5)
 	.attr("height", 15)
