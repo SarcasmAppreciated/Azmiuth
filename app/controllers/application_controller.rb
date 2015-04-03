@@ -15,6 +15,9 @@ class ApplicationController < ActionController::Base
   	month = Date.today.strftime("%m")
     day = Date.today.strftime("%d")
     @icebergs = Iceberg.query_by_month_day(month, day)
+    if @icebergs.empty?
+      @icebergs = Iceberg.query_by_month_day('04', '20')
+    end
   end
 
   def redirect_to_azimuthsail
