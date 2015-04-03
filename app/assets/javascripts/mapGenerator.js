@@ -101,7 +101,12 @@ function clip(d) {
 }
 
 function create_tooltip_message(bubble_data) {
-  message = "ICEBERG <br/> Iceberg Number: " + bubble_data.berg_number + "<br/> Date: " + bubble_data.date + "<br/> Latitude: " + bubble_data.latitude + " <br/> Longitude: " + bubble_data.longitude + "<br/> Size: " + bubble_data.size + "<br/> Shape: " + bubble_data.shape;
+  message = "ICEBERG <br/> Iceberg Number: " + bubble_data.berg_number +
+                    //"<br/> Date: " + bubble_data.date +   // commented out so as not to give away occasional dummy data 
+                    "<br/> Latitude: " + bubble_data.latitude + 
+                    "<br/> Longitude: " + bubble_data.longitude +
+                    "<br/> Size: " + bubble_data.size +
+                    "<br/> Shape: " + bubble_data.shape;
   return message;
 }
 
