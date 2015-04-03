@@ -153,6 +153,8 @@ function plot_bubbles(bubble_data) {
 
 var scale_size = 485;
 var scale_factor = 1;
+var MIN_SCALE = 485;
+var MAX_SCALE = 15000;
 
 function zoom_Helper(scale_input){
   scale_size = scale_input;
@@ -220,14 +222,14 @@ var zoom = d3.behavior.zoom()
       scale_factor = 1.25;
     }
 
-    if(scale_size >= 485 && scale_size <= 2500){
+    if(scale_size >= MIN_SCALE && scale_size <= MAX_SCALE){
       scale_size = scale_size * scale_factor;
       zoom_Helper(scale_size);
-      if (scale_size <= 485) {
-        scale_size = 485;
+      if (scale_size <= MIN_SCALE) {
+        scale_size = MIN_SCALE;
       }
-      if (scale_size >= 2500) {
-        scale_size = 2500;
+      if (scale_size >= MAX_SCALE) {
+        scale_size = MAX_SCALE;
       }
     }
   });
