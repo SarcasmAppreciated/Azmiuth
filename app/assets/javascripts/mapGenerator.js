@@ -73,7 +73,10 @@ function mousemove() {
     // Want to remove the old icebergs and tweets and then replot them
     d3.selectAll(".icons").remove();
     plot_bubbles(icebergs);
-    plot_tweets(tweets);
+    for (var i =0; i < users.length; i++) {
+      tweets = users[i];
+      plot_tweets(tweets);
+    }
     // Want to remove the old path and then replot it
     d3.selectAll(".arc").remove();
     plot_paths();
@@ -165,7 +168,10 @@ function zoom_Helper(scale_input){
   projection.scale(scale_size);
   // Plot the elements back on
   plot_bubbles(icebergs);
-  plot_tweets(tweets);
+  for (var i =0; i < users.length; i++) {
+      tweets = users[i];
+      plot_tweets(tweets);
+    }
   plot_paths();
   // Generate the map again.
   refresh();
@@ -246,19 +252,22 @@ var lineTransition = function lineTransition(path) {
 
 
 var links = [];
-if (tweets != null){
-  if (tweets.length != 0) {
+for (var i =0; i < users.length; i++) {
+    tweets = users[i];
+    if (tweets != null){
+      if (tweets.length != 0) {
 
-    for(var i=0, len=tweets.length-1; i<len; i++){
-      links.push({
-        type: "LineString",
-        coordinates: [
-        [ tweets[i].longitude, tweets[i].latitude ],
-        [ tweets[i+1].longitude, tweets[i+1].latitude ]
-        ]
-      });
+        for(var i=0, len=tweets.length-1; i<len; i++){
+          links.push({
+            type: "LineString",
+            coordinates: [
+            [ tweets[i].longitude, tweets[i].latitude ],
+            [ tweets[i+1].longitude, tweets[i+1].latitude ]
+            ]
+          });
+        }
+      } 
     }
-  } 
 }
 
 var arcGroup = svg.append('g');
@@ -316,5 +325,8 @@ function plot_tweets(tweet_data) {
   });
 }
 
-plot_tweets(tweets)
+for (var i =0; i < users.length; i++) {
+      tweets = users[i];
+      plot_tweets(tweets);
+    }
 });
