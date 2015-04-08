@@ -1,7 +1,7 @@
 <!--Load all user data on index -->
-<%= content_for :load_tweets do %>
+<%= content_for :load_users do %>
 	<%= javascript_tag do %>
-		tweets = <%= raw @user_tweets.to_json %>
+		users = <%= raw @users.to_json %>
 	<% end %>
 <% end %>
 

@@ -64,6 +64,7 @@ $(document).ready(function(){
 	
 	append_Tweets();
 	function append_Tweets() {
+		var tweets = users[0];
 		if ((tweets != null) &&(tweets.length != 0)){
 			for(var i = 0; i < tweets.length; i++)
 			{
