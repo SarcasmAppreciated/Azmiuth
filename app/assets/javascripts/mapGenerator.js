@@ -76,6 +76,7 @@ function mousemove() {
     for (var i =0; i < users.length; i++) {
       tweets = users[i];
       plot_tweets(tweets);
+      plot_last_tweet(tweets);
     }
     // Want to remove the old path and then replot it
     d3.selectAll(".arc").remove();
@@ -171,6 +172,7 @@ function zoom_Helper(scale_input){
   for (var i =0; i < users.length; i++) {
       tweets = users[i];
       plot_tweets(tweets);
+      plot_last_tweet(tweets);
     }
   plot_paths();
   // Generate the map again.
@@ -252,8 +254,8 @@ var lineTransition = function lineTransition(path) {
 
 
 var links = [];
-for (var i =0; i < users.length; i++) {
-    tweets = users[i];
+for (var user_num =0; user_num < users.length; user_num++) {
+    tweets = users[user_num];
     if (tweets != null){
       if (tweets.length != 0) {
 
@@ -294,14 +296,14 @@ function plot_paths() {
 plot_paths();
 
 function plot_tweets(tweet_data) {
-	svg.append("g")
+	return svg.append("g")
     .attr("class", "bubble")
     .selectAll("circle")
     .data(tweet_data)
 	// .enter().append("circle")
     .enter().append("image")
-	.attr("xlink:href", boat_image_path)
-	.attr("class", "icons")
+	// .attr("xlink:href", boat_image_path)
+	// .attr("class", "icons")
 	.attr("x", -7.5)
 	.attr("y", -7.5)
 	.attr("height", 15)
@@ -325,8 +327,16 @@ function plot_tweets(tweet_data) {
   });
 }
 
+function plot_last_tweet(tweet_data) {
+  var last_tweet = tweet_data[0]; 
+  plot_tweets([last_tweet])
+    .attr("xlink:href", boat_image_path)
+    .attr("class", "icons");
+}
+
 for (var i =0; i < users.length; i++) {
       tweets = users[i];
       plot_tweets(tweets);
+      plot_last_tweet(tweets);
     }
 });

@@ -1,6 +1,6 @@
-<%= content_for :load_tweets do %>
+<%= content_for :load_users do %>
 	<%= javascript_tag do %>
-		tweets = <%= raw @public_user.tweets.to_json %>
+		users = <%= raw @single_user.to_json %>
 	<% end %>
 <% end %>
 
