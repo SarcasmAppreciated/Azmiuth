@@ -72,12 +72,10 @@ function mousemove() {
     circle.origin(o1);    
     // Want to remove the old icebergs and tweets and then replot them
     d3.selectAll(".icons").remove();
+    d3.selectAll(".pathPoint").remove();
     plot_bubbles(icebergs);
-    for (var i =0; i < users.length; i++) {
-      tweets = users[i];
-      plot_tweets(tweets);
-      plot_last_tweet(tweets);
-    }
+    plot_all_tweets();
+    plot_paths();
     // Want to remove the old path and then replot it
     d3.selectAll(".arc").remove();
     plot_paths();
@@ -169,11 +167,7 @@ function zoom_Helper(scale_input){
   projection.scale(scale_size);
   // Plot the elements back on
   plot_bubbles(icebergs);
-  for (var i =0; i < users.length; i++) {
-      tweets = users[i];
-      plot_tweets(tweets);
-      plot_last_tweet(tweets);
-    }
+  plot_all_tweets();
   plot_paths();
   // Generate the map again.
   refresh();
@@ -255,7 +249,7 @@ var lineTransition = function lineTransition(path) {
 
 var links = [];
 for (var user_num =0; user_num < users.length; user_num++) {
-    tweets = users[user_num];
+    var tweets = users[user_num];
     if (tweets != null){
       if (tweets.length != 0) {
 
@@ -308,6 +302,7 @@ function plot_tweets(tweet_data) {
 	.attr("y", -7.5)
 	.attr("height", 15)
 	.attr("width", 15)
+  .attr("class", "pathPoint")
     .attr("transform", function(d) {
       tweet_dat = [d.longitude, d.latitude];
       return "translate(" + projection(tweet_dat) + ")"; 
@@ -334,9 +329,18 @@ function plot_last_tweet(tweet_data) {
     .attr("class", "icons");
 }
 
-for (var i =0; i < users.length; i++) {
-      tweets = users[i];
-      plot_tweets(tweets);
-      plot_last_tweet(tweets);
+function plot_all_tweets() {
+  for (var i =0; i < users.length; i++) {
+    var tweets = users[i];
+    if (tweets != null) {
+      if (tweets.length != 0) {
+        plot_tweets(tweets);
+        plot_last_tweet(tweets);
+      }
     }
+  }
+}
+
+plot_all_tweets();
+
 });
