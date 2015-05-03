@@ -103,7 +103,7 @@ function clip(d) {
 }
 
 function create_tooltip_message(bubble_data) {
-  message = "ICEBERG <br/> Iceberg Number: " + bubble_data.berg_number +
+  message = "<b>ICEBERG</b> <br/> Iceberg Number: " + bubble_data.berg_number +
                     //"<br/> Date: " + bubble_data.date +   // commented out so as not to give away occasional dummy data 
                     "<br/> Latitude: " + bubble_data.latitude + 
                     "<br/> Longitude: " + bubble_data.longitude +
@@ -114,7 +114,7 @@ function create_tooltip_message(bubble_data) {
 
 
 function create_tooltip_message_tweets(tweet_data) {
-  message = "TWEET <br/> Latitude: " + tweet_data.latitude + " <br/> Longitude: " + tweet_data.longitude + "<br/> Timestamp: " + tweet_data.time_stamp + "<br/> Tweet: " + tweet_data.tweet_text;
+  message = "<b>TWEET</b> <br/> Latitude: " + tweet_data.latitude + " <br/> Longitude: " + tweet_data.longitude + "<br/> Timestamp: " + tweet_data.time_stamp + "<br/> Tweet: " + tweet_data.tweet_text;
 
   return message;
 }
